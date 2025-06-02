@@ -1,0 +1,41 @@
+name: CI Pipeline (pnpm)
+
+on:
+    pull_request:
+        branches:
+            - '**' # для всех PR-веток
+
+jobs:
+    test-and-build:
+        name: 🧪 Test and Build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: 📥 Checkout repository
+              uses: actions/checkout@v3
+
+            - name: 🔧 Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: 📦 Install corepack and pnpm
+              run: |
+                  npm install -g corepack@latest
+                  corepack enable pnpm
+
+            - name: 📦 Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: 🔍 pnpm run ci-check
+              run: pnpm run ci-check
+
+            - name: ✅ pnpm run ci-test
+              run: pnpm run ci-test
+
+            - name: 🏗️ pnpm run ci-build
+              run: pnpm run ci-build
+
+            - name: 🧱 pnpm run ci-sb-build
+              run: pnpm run ci-sb-build
