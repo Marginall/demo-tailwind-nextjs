@@ -17,6 +17,7 @@ import { UiSvgIcon } from '@/_ui/components/svg/icon';
 export async function Header(): Promise<ReactElement> {
 	const { logo, navCategories, weather, currency, trendTags, socials } = await useHeader();
 	const t = await getI18n();
+	const testCi = '';
 
 	return (
 		<>
