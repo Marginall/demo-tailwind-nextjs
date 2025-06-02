@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-restricted-imports
 import { useTranslations } from 'next-intl';
 
 // Picks only the namespaces that are starting with '$.'

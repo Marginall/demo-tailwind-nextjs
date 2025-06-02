@@ -1,5 +1,5 @@
+import { LinkProps } from 'next/dist/client/link';
 import { ReactNode } from 'react';
-import { LinkProps } from 'next/link';
 
 export interface UiLinkProps
 	extends Omit<LinkProps, 'locale' | 'legacyBehavior'>,

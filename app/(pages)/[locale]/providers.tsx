@@ -5,7 +5,7 @@ import { ApolloProvider } from '@/_library/apollo/client';
 import { CommonData, DataProvider } from '@/_library/ssr';
 import { IntlMessages, transformToServer } from '@/_library/i18n';
 import { HeroUIProvider, ToastProvider } from '@heroui/react';
-import { useRouter } from 'next/navigation';
+import { useRouter } from '@/_routing/navigation';
 
 export interface ProvidersProps extends CommonData {
 	children: ReactNode;

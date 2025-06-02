@@ -1,4 +1,4 @@
-import { ReactElement, Fragment } from 'react';
+import { ReactElement } from 'react';
 import { HeaderLocalesProps } from './types';
 import { getTestid } from '@/_ui/utils/get-testid';
 

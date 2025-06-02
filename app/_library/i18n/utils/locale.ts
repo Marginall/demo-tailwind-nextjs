@@ -6,8 +6,8 @@ export const DEFAULT_LOCALE: Readonly<Locale> = 'ru';
 export const LOCALE_TRANSFORM_DATA = [
 	{
 		server: 'uk',
-		client: 'ua'
-	}
+		client: 'ua',
+	},
 ];
 
 export function isLocale(locale: string): locale is Locale {

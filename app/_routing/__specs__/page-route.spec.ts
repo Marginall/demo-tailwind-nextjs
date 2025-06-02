@@ -22,10 +22,7 @@ describe('PageRoute', () => {
 		});
 
 		it('should return the pathname with the get params', () => {
-			const route = new PageRoute<
-				null,
-				{ key?: string; numbers?: number[] }
-			>({
+			const route = new PageRoute<null, { key?: string; numbers?: number[] }>({
 				pathname: '/section/child',
 			});
 			const path = route.buildHref({
@@ -38,10 +35,7 @@ describe('PageRoute', () => {
 		});
 
 		it('should return the replaced value for the pathname with the get params', () => {
-			const route = new PageRoute<
-				{ id: string },
-				{ price?: number; onlyAvailable?: boolean }
-			>({
+			const route = new PageRoute<{ id: string }, { price?: number; onlyAvailable?: boolean }>({
 				pathname: '/section/[id]/id',
 			});
 			expect(
@@ -56,10 +50,7 @@ describe('PageRoute', () => {
 		});
 
 		it('should not fall with TS error on creating path without params, even if corresponding generic type is defined', () => {
-			const route = new PageRoute<
-				null,
-				{ key?: string; numbers?: number[] }
-			>({
+			const route = new PageRoute<null, { key?: string; numbers?: number[] }>({
 				pathname: '/section/child',
 			});
 			const path = route.buildHref();

@@ -19,24 +19,20 @@ describe('UiRenderIf', () => {
 		{ condition: [2].length, shouldRender: true },
 	];
 
-	[...negativeCases, ...positiveCases].forEach(
-		({ condition, shouldRender }) => {
-			test(`should ${shouldRender ? 'render' : 'not render'} child value with ${condition} condition`, () => {
-				const testId = 'child';
-				render(
-					<UiRenderIf condition={condition}>
-						<div data-testid={testId}>
-							Lorem ipsum dolor sit amet.
-						</div>
-					</UiRenderIf>
-				);
-				const child = screen.queryByTestId(testId);
-				if (shouldRender) {
-					expect(child).not.toBeNull();
-				} else {
-					expect(child).toBeNull();
-				}
-			});
-		}
-	);
+	[...negativeCases, ...positiveCases].forEach(({ condition, shouldRender }) => {
+		test(`should ${shouldRender ? 'render' : 'not render'} child value with ${condition} condition`, () => {
+			const testId = 'child';
+			render(
+				<UiRenderIf condition={condition}>
+					<div data-testid={testId}>Lorem ipsum dolor sit amet.</div>
+				</UiRenderIf>
+			);
+			const child = screen.queryByTestId(testId);
+			if (shouldRender) {
+				expect(child).not.toBeNull();
+			} else {
+				expect(child).toBeNull();
+			}
+		});
+	});
 });

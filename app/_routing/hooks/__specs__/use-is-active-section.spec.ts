@@ -38,13 +38,10 @@ describe('useIsActiveSection', () => {
 
 	TEST_CASES.forEach(({ pathname, params, expected }) => {
 		it(
-			`should return \`${expected}\` for pathname "${pathname}" ` +
-				`when params are ${JSON.stringify(params)}`,
+			`should return \`${expected}\` for pathname "${pathname}" ` + `when params are ${JSON.stringify(params)}`,
 			() => {
 				mockedPathnameHook.mockReturnValueOnce(pathname);
-				const { result } = renderHook(() =>
-					useIsActiveSection(...params)
-				);
+				const { result } = renderHook(() => useIsActiveSection(...params));
 				expect(result.current).toBe(expected);
 			}
 		);

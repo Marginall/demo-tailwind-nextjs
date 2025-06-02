@@ -3,10 +3,7 @@ import { usePathname } from '@/_routing/navigation';
 
 export type MatchType = 'startsWith' | 'exact';
 
-export function useIsActiveSection(
-	href: string,
-	match: MatchType = 'startsWith'
-): boolean {
+export function useIsActiveSection(href: string, match: MatchType = 'startsWith'): boolean {
 	const pathname = usePathname();
 	switch (match) {
 		case 'startsWith':

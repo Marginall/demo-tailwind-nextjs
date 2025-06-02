@@ -3,11 +3,7 @@ import { transformToServer } from '@/_library/i18n';
 import { ApolloProps } from '../types';
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs';
 
-export function getUploadLink({
-	url,
-	locale,
-	xForwardedFor,
-}: ApolloProps): ApolloLink {
+export function getUploadLink({ url, locale, xForwardedFor }: ApolloProps): ApolloLink {
 	return createUploadLink({
 		uri: url,
 		fetch,

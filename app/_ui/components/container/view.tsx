@@ -6,7 +6,7 @@ export function UiContainer({
 	as: Component = 'div',
 	children,
 	className,
-	variant = 'default'
+	variant = 'default',
 }: UiContainerProps): ReactElement {
 	return (
 		<Component
@@ -16,7 +16,7 @@ export function UiContainer({
 					'max-w-[1650px] px-4 lg:px-16': variant === 'default',
 					'max-w-[1280px] px-4 lg:px-16': variant === 'medium',
 					'max-w-[1920px]': variant === 'full',
-					'max-w-[984px] px-4 lg:px-16': variant === 'article'
+					'max-w-[984px] px-4 lg:px-16': variant === 'article',
 				},
 				className
 			)}

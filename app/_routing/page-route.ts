@@ -1,7 +1,4 @@
-export type Params = Record<
-	string,
-	string | number | boolean | string[] | number[] | boolean[]
->;
+export type Params = Record<string, string | number | boolean | string[] | number[] | boolean[]>;
 
 export type Segments = Record<string, string | number>;
 
@@ -28,12 +25,7 @@ export class PageRoute<
 		this.pathname = pathname;
 		this.disabled = !!disabled;
 		this.buildHref = ((_: BuildVarietyParams<S, P, H[number]> = {}) => {
-			const helper = new BuildHelper(
-				this.pathname,
-				_.segments || null,
-				_.params || null,
-				_.hash || null
-			);
+			const helper = new BuildHelper(this.pathname, _.segments || null, _.params || null, _.hash || null);
 			return helper.build();
 		}) as BuildFn<S, P, H[number]>;
 	}
