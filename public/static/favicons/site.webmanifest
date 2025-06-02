@@ -1,0 +1,7 @@
+{
+  "name": "MyWebSite",
+  "short_name": "MySite",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

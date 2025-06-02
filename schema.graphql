@@ -1,0 +1,1977 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+input AdminCreateInput {
+  """Массив ид доменов"""
+  domains: [ID!]
+  """Емайл админа"""
+  email: String!
+  """Чи має власну сторінку"""
+  has_owned_page: Boolean!
+  """Ссылка на LinkedIn"""
+  linkedin_url: String
+  """Пароль админа"""
+  password: String!
+  """Номер телефона"""
+  phone: String!
+  """Роль админа"""
+  role_id: ID!
+  """Переводы для ФИО."""
+  translates: [AdminTranslatesInput!]!
+}
+
+type AdminLoginType {
+  access_token: String!
+  expires_in: Int!
+  refresh_expires_in: Int!
+  refresh_token: String!
+  token_type: String!
+}
+
+"""Список возможных типов изображений."""
+enum AdminMediaCollectionEnum {
+  cover
+}
+
+"""Список всех возможных разрешений для типа: graph_admin"""
+enum AdminPermissionEnum {
+  admin_create
+  admin_delete
+  admin_list
+  admin_update
+  article_create
+  article_delete
+  article_foreign_delete
+  article_foreign_read
+  article_foreign_update
+  article_list
+  article_update
+  articleseotemplate_create
+  articleseotemplate_delete
+  articleseotemplate_list
+  articleseotemplate_update
+  block_create
+  block_delete
+  block_list
+  block_update
+  category_create
+  category_delete
+  category_list
+  category_update
+  domain_create
+  domain_delete
+  domain_list
+  domain_update
+  global_setting_create
+  global_setting_delete
+  global_setting_list
+  global_setting_update
+  ip_access_create
+  ip_access_delete
+  ip_access_list
+  ip_access_update
+  page_create
+  page_delete
+  page_list
+  page_update
+  pageseotemplate_create
+  pageseotemplate_delete
+  pageseotemplate_list
+  pageseotemplate_update
+  role_create
+  role_delete
+  role_list
+  role_update
+  seoredirect_create
+  seoredirect_delete
+  seoredirect_list
+  seoredirect_update
+  special_tag_create
+  special_tag_delete
+  special_tag_list
+  special_tag_update
+  tag_create
+  tag_delete
+  tag_list
+  tag_update
+  tagseotemplate_create
+  tagseotemplate_delete
+  tagseotemplate_list
+  tagseotemplate_update
+  translate_delete
+  translate_list
+  translate_update
+  user_create
+  user_delete
+  user_list
+  user_update
+}
+
+type AdminProfileType {
+  """Главное фото."""
+  cover: File
+  created_at: String!
+  email: String!
+  """Имя админа"""
+  first_name: String!
+  id: ID!
+  language: LanguageType
+  """Фамилия админа"""
+  last_name: String!
+  """Отчество админа"""
+  middle_name: String
+  name: String!
+  """Список возможных разрешений для текущей модели."""
+  permission: [String]
+  permissions: [PermissionType]
+  """Номер телефона"""
+  phone: String!
+  roles: [RoleType]
+  updated_at: String!
+}
+
+input AdminTranslatesInput {
+  """Экспертность, сведения об образовании."""
+  description: String
+  """Имя."""
+  first_name: String!
+  """Язык перевода."""
+  language: String!
+  """Фамилия."""
+  last_name: String!
+  """Отчество."""
+  middle_name: String
+  """Должность"""
+  position: String
+  """Slug"""
+  slug: String
+}
+
+type AdminTranslatesType {
+  created_at: String!
+  """Экспертность, сведения об образовании."""
+  description: String
+  """Имя админа"""
+  first_name: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  """Фамилия админа"""
+  last_name: String!
+  """Отчество админа"""
+  middle_name: String
+  """Должность"""
+  position: String
+  """Slug"""
+  slug: String
+  updated_at: String!
+}
+
+type AdminType {
+  """Количество созданных новостей."""
+  articles_count: Int
+  """Количество созданных новостей в текстовом формате."""
+  articles_count_text: String!
+  """Главное фото."""
+  cover: File
+  created_at: String!
+  """Список доменов к которым прекреплен админ"""
+  domains: [DomainType!]
+  email: Email!
+  """Чи буде автор публікуватися на своїй сторінці"""
+  has_owned_page: Boolean!
+  id: ID!
+  """Является ли сущность предпочитаемой для персональной ленты новостей."""
+  is_preferred: Boolean!
+  """Ссылка на LinkedIn"""
+  linkedin_url: String
+  name: String!
+  """Список возможных разрешений для текущей модели."""
+  permission: [String]
+  """Номер телефона"""
+  phone: String!
+  roles: [RoleType]
+  """Перевод."""
+  translate: AdminTranslatesType!
+  """Переводы."""
+  translates: [AdminTranslatesType!]!
+  updated_at: String!
+}
+
+type AdminTypePagination {
+  """List of items on the current page"""
+  data: [AdminType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+input AdminUpdateInput {
+  """Массив ид доменов"""
+  domains: [ID!]
+  """Емайл админа"""
+  email: String!
+  """Чи має власну сторінку"""
+  has_owned_page: Boolean!
+  """Ссылка на LinkedIn"""
+  linkedin_url: String
+  """Пароль админа"""
+  password: String
+  """Номер телефона"""
+  phone: String!
+  """Роль админа"""
+  role_id: ID!
+  """Переводы для ФИО."""
+  translates: [AdminTranslatesInput!]!
+}
+
+type AdminUserLoginType {
+  access_token: String!
+  expires_in: Int!
+  refresh_expires_in: Int!
+  token_type: String!
+}
+
+"""Список возможных действий с уведомлениями."""
+enum AlertActionEnum {
+  read
+  unread
+}
+
+"""Список возможных привязок предупреждающих сообщений."""
+enum AlertEnumType {
+  email_not_verified
+}
+
+"""Сообщение для отображения на фронте (уведомления)."""
+type AlertMessageType {
+  article_id: Int
+  created_at: String!
+  description: String!
+  id: ID!
+  is_read: Boolean!
+  title: String!
+  type: String!
+  updated_at: String!
+}
+
+type AlertMessageTypePagination {
+  """List of items on the current page"""
+  data: [AlertMessageType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+type ArticleCardTranslatesType {
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+}
+
+type ArticleCardType {
+  """Количество фото для карусели."""
+  carousel_images_count: Int!
+  categories: [CategoryLabelType!]
+  """Главное фото."""
+  cover: File
+  created_at: String!
+  id: ID!
+  """Флаг того что статья сохранена в избранном."""
+  is_stored: Boolean!
+  published_at: String
+  """Slug для ЧПУ."""
+  slug: String!
+  """Специальный тег."""
+  special_tag: SpecialTagType
+  """Перевод для статьи и поля для SEO."""
+  translate: ArticleCardTranslatesType!
+  """Видео."""
+  video_links: [VideoLink!]
+  """Количество видео."""
+  video_links_count: Int!
+}
+
+input ArticleInput {
+  """Статті якого автора необхідно отримати"""
+  author_slug: String
+  """Список авторов."""
+  authors: [ID!]
+  """Возможность прослушать новость."""
+  can_listen: Boolean!
+  """Список категорий."""
+  categories: [ID]!
+  """Массив ид доменов"""
+  domains: [ID!]
+  """Время чтения статьи."""
+  expected_reading_time: Int
+  """Выбрать новость как топ дня."""
+  is_day_top: Boolean
+  """Выбрать новость как выбор редакции."""
+  is_editor_choice: Boolean
+  """Также публиковать на фейсбуке."""
+  publish_also_in_fb: Boolean!
+  """Разрешена ли новость для RSS ленты."""
+  rss_is_allowed: Boolean
+  """Дата (с временем) с которой статья считается опубликованной."""
+  scheduled_at: String
+  """Похожие новости."""
+  similar_articles: [ID]
+  """Slug для ЧПУ."""
+  slug: String!
+  """ID специального тега."""
+  special_tag_id: ID
+  """
+  Статус статьи. Возможные значения: draft, moderation, published, future
+  """
+  status: String!
+  """Теги."""
+  tags: [ID]
+  """Переводы для статьи и поля для SEO."""
+  translates: [ArticleTranslatesInput!]!
+  """Информация по видео."""
+  video_links: [VideoLinkInput!]
+  """Нужно ли добавлять водяной знак для всех фото."""
+  with_watermark: Boolean!
+}
+
+"""Список возможных типов изображений."""
+enum ArticleMediaCollectionEnum {
+  archive
+  carousel
+  cover
+}
+
+type ArticleSeoTemplate {
+  """Категории, к которым привязан шаблон."""
+  categories: [CategoryType]!
+  created_at: String!
+  """Домен."""
+  domain: DomainType!
+  id: ID!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Перевод для шаблона."""
+  translate: ArticleSeoTemplateTranslates!
+  """Переводы для шаблона."""
+  translates: [ArticleSeoTemplateTranslates!]!
+  updated_at: String!
+}
+
+input ArticleSeoTemplateInput {
+  """Список категорий."""
+  categories: [ID]
+  """Домен ID."""
+  domain_id: ID!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Переводы тега."""
+  translates: [ArticleSeoTemplateTranslatesInput!]!
+}
+
+type ArticleSeoTemplateTranslates {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+}
+
+input ArticleSeoTemplateTranslatesInput {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+}
+
+input ArticleTranslatesInput {
+  """Описание для карусели."""
+  carousel_description: String
+  """Содержимое статьи."""
+  content: String
+  """Ключевые моменты."""
+  key_points: String
+  """Язык перевода."""
+  language: String!
+  """Абзац."""
+  lead_paragraph: String
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO keywords тега."""
+  seo_keywords: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Тайтл."""
+  title: String
+}
+
+type ArticleTranslatesType {
+  """Описание для карусели."""
+  carousel_description: String
+  """Содержимое статьи."""
+  content(prettify: Boolean = true): String!
+  created_at: String!
+  id: ID!
+  """Ключевые моменты."""
+  key_points: String
+  """Язык перевода."""
+  language: String!
+  """Абзац."""
+  lead_paragraph: String
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO keywords тега."""
+  seo_keywords: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+  updated_at: String!
+}
+
+type ArticleType {
+  """Список соавторов."""
+  authors: [AdminType!]
+  """Возможность прослушать новость."""
+  can_listen: Boolean!
+  """Список фото для карусели."""
+  carousel_images: [File]
+  """Количество фото для карусели."""
+  carousel_images_count: Int!
+  """Категории."""
+  categories: [CategoryType!]!
+  """Главное фото."""
+  cover: File
+  created_at: String!
+  """Список доменов к которым прикреплена статья"""
+  domains: [DomainType!]
+  """Примерное время чтения статьи."""
+  expected_reading_time: Int
+  id: ID!
+  """Вывести новость как топ дня."""
+  is_day_top: Boolean
+  """Вывести новость как выбор редакции."""
+  is_editor_choice: Boolean
+  """Флаг того что статья сохранена в понравившемся."""
+  is_liked: Boolean!
+  """Флаг того что статья сохранена в избранном."""
+  is_stored: Boolean!
+  """Количество лайков"""
+  liked_count: Int!
+  """Автор."""
+  owner: AdminType!
+  """Также публиковать на фейсбуке."""
+  publish_also_in_fb: Boolean!
+  """Дата с которой статья считается опубликованной."""
+  published_at: String
+  """Разрешена ли новости для RSS ленты."""
+  rss_is_allowed: Boolean!
+  """Дата (запланированная) с которой статья считается опубликованной."""
+  scheduled_at: String
+  """SEO."""
+  seo: SeoType!
+  """Похожие новости."""
+  similar_articles: [ArticleType!]
+  """Slug для ЧПУ."""
+  slug: String!
+  """Специальный тег."""
+  special_tag: SpecialTagType
+  """
+  Статус статьи. Возможные значения: draft, moderation, published, future
+  """
+  status: String!
+  """Количество сохранений"""
+  stored_count: Int!
+  """Список тегов."""
+  tags: [TagType!]
+  """Количество уникальных просмотров новости за день."""
+  today_unique_views: Int!
+  """Общее количество просмотров новости."""
+  total_views: Int!
+  """Перевод для статьи и поля для SEO."""
+  translate: ArticleTranslatesType!
+  """Переводы для статьи и поля для SEO."""
+  translates: [ArticleTranslatesType!]!
+  """Количество уникальных просмотров новости."""
+  unique_views: Int!
+  updated_at: String!
+  """Видео."""
+  video_links: [VideoLink!]
+  """Количество видео."""
+  video_links_count: Int!
+  """Нужно ли добавлять водяной знак для всех фото."""
+  with_watermark: Boolean!
+}
+
+type ArticleTypePagination {
+  """List of items on the current page"""
+  data: [ArticleType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+union Authenticatable = AdminType | UserType
+
+type Block {
+  """Дата (Y-m-d) до которой (не включительно) блок будет отображаться."""
+  active_to: String
+  created_at: String!
+  """Список доменов к которым прекреплен блок"""
+  domains: [DomainType!]
+  id: ID!
+  is_active: Boolean!
+  """код блока"""
+  slug: String!
+  """Перевод для блока."""
+  translate: BlockTranslatesType!
+  """Переводы для блоков."""
+  translates: [BlockTranslatesType!]!
+  updated_at: String!
+  """uri рекламодателя"""
+  url: String!
+}
+
+type BlockData {
+  """Размер блока."""
+  size: String!
+  """slug блока."""
+  slug: String!
+  """Название блока для админки."""
+  title: String!
+}
+
+input BlockInput {
+  """Дата (Y-m-d) до которой (не включительно) блок будет отображаться."""
+  active_to: String
+  """Массив ид доменов"""
+  domains: [ID!]!
+  is_active: Boolean!
+  """Slug для фронта."""
+  slug: String!
+  """Переводы для блоков."""
+  translates: [BlockTranslatesInputType!]!
+  """Ссылка на рекламодателя"""
+  url: String!
+}
+
+"""Список возможных типов изображений."""
+enum BlockMediaCollectionEnum {
+  image
+}
+
+type BlockPagination {
+  """List of items on the current page"""
+  data: [Block]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+input BlockTranslatesAttachImagesInput {
+  id: ID!
+  images: [FileInput!]!
+  images_type: BlockMediaCollectionEnum!
+}
+
+input BlockTranslatesDetachImagesInput {
+  id: ID!
+  images: [ID]!
+  images_type: BlockMediaCollectionEnum!
+}
+
+input BlockTranslatesInputType {
+  """Язык перевода."""
+  language: String!
+  """Контент для Мобилных"""
+  mobile_content: String
+  """Контент для Веб версии"""
+  web_content: String
+}
+
+type BlockTranslatesType {
+  created_at: String!
+  id: ID!
+  """картинка блока."""
+  image: File
+  """Язык перевода."""
+  language: String!
+  """Контент для Мобилных"""
+  mobile_content: String
+  updated_at: String!
+  """Контент для Веб версии"""
+  web_content: String
+}
+
+type BooleanMessage {
+  data: Boolean
+  message: String
+  """Возможные варианты: success, error, warning"""
+  type: MessageTypeEnum
+}
+
+type CategoryBlockItemTranslatesType {
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+}
+
+type CategoryBlockItemType {
+  """Цвет для отображения."""
+  color: String!
+  id: ID!
+  popular_tags: [TagLabelType!]
+  """Slug для ЧПУ."""
+  slug: String!
+  """Перевод для категории и поля для SEO."""
+  translate: CategoryBlockItemTranslatesType!
+}
+
+input CategoryInput {
+  """Цвет для отображения."""
+  color: String!
+  """ид домена"""
+  domain_id: ID!
+  """Нужно ли принудительно скрыть из списка категорий на главной."""
+  hide_from_main_page: Boolean!
+  """ID родителя."""
+  parent_id: ID
+  """Порядок сортировки в пределах главного меню (шапка сайта)."""
+  position: Int!
+  """Порядок сортировки в списке категорий (главная страница)."""
+  position_in_main_page: Int!
+  """Показывать ли принудительно в хедере (даже если это подкатегория)."""
+  show_in_header: Boolean!
+  """Slug для ЧПУ."""
+  slug: String!
+  """Переводы для категории и поля для SEO."""
+  translates: [CategoryTranslatesInput!]!
+}
+
+type CategoryLabelTranslatesType {
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+}
+
+type CategoryLabelType {
+  """Цвет для отображения."""
+  color: String!
+  id: ID!
+  """Slug для ЧПУ."""
+  slug: String!
+  """Перевод для категории"""
+  translate: CategoryLabelTranslatesType!
+}
+
+input CategoryTranslatesInput {
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO text."""
+  seo_text: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+}
+
+type CategoryTranslatesType {
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO text."""
+  seo_text: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+}
+
+type CategoryType {
+  articles(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): ArticleTypePagination
+  """Цвет для отображения."""
+  color: String!
+  created_at: String!
+  """Домен к которому относится категория."""
+  domain: DomainType!
+  """
+  Имеет ли категория предпочитаемые подкатегории для персональной ленты новостей.
+  """
+  has_preferred_children: Boolean!
+  """Нужно ли принудительно скрыть из списка категорий на главной."""
+  hide_from_main_page: Boolean!
+  id: ID!
+  """Является ли сущность предпочитаемой для персональной ленты новостей."""
+  is_preferred: Boolean!
+  """Родительская категория."""
+  parent: CategoryType
+  popular_tags(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): TagTypePagination
+  """Порядок сортировки в пределах главного меню (шапка сайта)."""
+  position: Int!
+  """Порядок сортировки в списке категорий (главная страница)."""
+  position_in_main_page: Int!
+  """Показывать ли принудительно в хедере (даже если это подкатегория)."""
+  show_in_header: Boolean!
+  """Slug для ЧПУ."""
+  slug: String!
+  """Все подкатегории."""
+  subCategories: [CategoryType]
+  """Перевод для категории и поля для SEO."""
+  translate: CategoryTranslatesType!
+  """Переводы для категории и поля для SEO."""
+  translates: [CategoryTranslatesType!]!
+  updated_at: String!
+}
+
+type CategoryTypePagination {
+  """List of items on the current page"""
+  data: [CategoryType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+type CommonDomain {
+  """Черный логотип домена."""
+  black_logo: File
+  """Favicon."""
+  favicon_large: File
+  """Favicon."""
+  favicon_medium: File
+  """Favicon."""
+  favicon_small: File
+  """Логотип домена в футере."""
+  footer_logo: File
+  id: ID!
+  """Логотип домена."""
+  logo: File
+  """Название домена."""
+  name: String!
+  setting: DomainSettingType
+  """Ссылка домена."""
+  url: String!
+}
+
+input DomainInput {
+  """Название домена."""
+  name: String!
+  """Ссылка домена."""
+  url: String!
+}
+
+"""Список возможных типов изображений."""
+enum DomainMediaCollectionEnum {
+  black_logo
+  favicon_large
+  favicon_medium
+  favicon_small
+  footer_logo
+  logo
+}
+
+input DomainSettingInput {
+  advert_phone: String
+  contacts_email: String
+  contacts_phone: String
+  """ID домена, для которого идет настройка."""
+  domain_id: ID!
+  """Ид страницы фейсбука"""
+  facebook_page_id: String
+  """Список тегов, которые сейчас в тренде в рамках домена."""
+  in_trend_tag_ids: [ID]
+  """Latitude (используется для погоды)."""
+  lat: Float
+  """Longitude (используется для погоды)."""
+  lon: Float
+  """ID тега, который сейчас в топе в рамках домена."""
+  top_tag_id: ID
+  """Переводы для статьи и поля для SEO."""
+  translates: [DomainSettingTranslatesInput!]!
+}
+
+input DomainSettingTranslatesInput {
+  """Адрес"""
+  address: String
+  advert_title: String
+  """Содержимое SEO description тега. (страница /all-articles)"""
+  articles_seo_description: String
+  """Содержимое SEO H1 тега. (страница /all-articles)"""
+  articles_seo_h1: String
+  """Содержимое SEO title тега. (страница /all-articles)"""
+  articles_seo_title: String
+  contacts_title: String
+  """Язык перевода."""
+  language: String!
+  """Главный редактор"""
+  main_redactor: String
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Содержимое SEO description тега. (страница /video)"""
+  video_seo_description: String
+  """Содержимое SEO H1 тега. (страница /video)"""
+  video_seo_h1: String
+  """Содержимое SEO title тега. (страница /video)"""
+  video_seo_title: String
+}
+
+type DomainSettingTranslatesType {
+  address: String
+  advert_title: String
+  """Содержимое SEO description тега. (страница /all-articles)"""
+  articles_seo_description: String
+  """Содержимое SEO H1 тега. (страница /all-articles)"""
+  articles_seo_h1: String
+  """Содержимое SEO title тега. (страница /all-articles)"""
+  articles_seo_title: String
+  contacts_title: String
+  created_at: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  main_redactor: String
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  updated_at: String!
+  """Содержимое SEO description тега. (страница /video)"""
+  video_seo_description: String
+  """Содержимое SEO H1 тега. (страница /video)"""
+  video_seo_h1: String
+  """Содержимое SEO title тега. (страница /video)"""
+  video_seo_title: String
+}
+
+type DomainSettingType {
+  advert_phone: String
+  contacts_email: String
+  contacts_phone: String
+  created_at: String!
+  currency: String
+  domain: DomainType!
+  """Ид страницы фейсбука"""
+  facebook_page_id: String
+  id: ID!
+  in_trend_tags: [TagType]
+  lat: Float
+  lon: Float
+  top_tag: TagType
+  """Перевод для категории и поля для SEO."""
+  translate: DomainSettingTranslatesType!
+  """Переводы для категории и поля для SEO."""
+  translates: [DomainSettingTranslatesType!]!
+  updated_at: String!
+  weather: String
+}
+
+type DomainSocialLinkType {
+  domain: DomainType!
+  id: ID!
+  is_active: Boolean!
+  social: SocialLinkType!
+  url: String!
+}
+
+type DomainType {
+  articles: [ArticleType!]
+  """Черный логотип домена."""
+  black_logo: File
+  categories: [CategoryType!]
+  domain_social_links: [DomainSocialLinkType!]
+  """Favicon."""
+  favicon_large: File
+  """Favicon."""
+  favicon_medium: File
+  """Favicon."""
+  favicon_small: File
+  """Логотип домена в футере."""
+  footer_logo: File
+  id: ID!
+  """Логотип домена."""
+  logo: File
+  """Имя домена для админки"""
+  name: String!
+  setting: DomainSettingType
+  tags(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): TagTypePagination
+  trend_tags: [TagType!]
+  url: String!
+}
+
+scalar Email
+
+type File {
+  """Поле для SEO."""
+  alt: String
+  """Подпись фото."""
+  caption: String
+  """Цвет фото."""
+  color: String
+  """Уникальный идентификатор файла"""
+  id: ID!
+  """Тип файла."""
+  mime_type: String
+  """Название файла (без расширения)."""
+  name: String!
+  """Ссылка на оригинал файл."""
+  original_url: String
+  """Позиция во время сортировки."""
+  position: Int
+  """Srcset для html (если установлен)."""
+  responsive_images: String
+  """Все нарезанные картинки."""
+  responsive_images_as_array: [ResponsiveImageSize!]!
+  """Размер файла (в байтах, 1МБ = 1024б)."""
+  size: Int!
+  """Ссылка на файл определенного размера."""
+  special_url(
+    """
+    Возможные значения: extra-extra-large, extra-large, large, banner, medium, small, extra-small
+    """
+    image_type: String = "large"
+  ): String
+  """Поле для SEO."""
+  title: String
+  """Ссылка на файл."""
+  url: String
+  """Уникальный идентификатор файла (UUID)"""
+  uuid: String!
+}
+
+input FileInput {
+  """Поле для SEO."""
+  alt: String
+  """Подпись фото."""
+  caption: String
+  """Цвет фото."""
+  color: String
+  """Файл для загрузки."""
+  file: Upload!
+  """Позиция во время сортировки."""
+  position: Int
+  """Поле для SEO."""
+  title: String
+}
+
+input GlobalSettingInput {
+  """Ключ хранимого поля."""
+  field_key: String!
+  """Значение хранимого поля."""
+  field_value: String!
+}
+
+type GlobalSettingType {
+  """Ключ хранимого поля."""
+  field_key: String!
+  """Значение хранимого поля."""
+  field_value: String!
+}
+
+type GrantGroupType {
+  key: ID
+  name: String!
+  permissions: [GrantType]
+  position: Int!
+}
+
+type GrantType {
+  key: String!
+  name: String!
+  position: Int!
+}
+
+type HomePageCategoryBlockType {
+  articles: [ArticleCardType!]
+  categories: [CategoryBlockItemType!]
+}
+
+type ImageSize {
+  """slug размера картинки."""
+  slug: String!
+  """Ширина картинки."""
+  width: Int!
+}
+
+type IntMessage {
+  data: Int
+  message: String
+  """Возможные варианты: success, error, warning"""
+  type: MessageTypeEnum
+}
+
+type IpAccessType {
+  active: Boolean!
+  address: String!
+  created_at: String!
+  description: String
+  id: ID!
+  updated_at: String!
+}
+
+type LanguageType {
+  name: String!
+  slug: String!
+}
+
+"""Список типов сообщений."""
+enum MessageTypeEnum {
+  error
+  success
+  warning
+}
+
+type Mutation {
+  ArticleUserLike(article: ID!, like: Boolean!): BooleanMessage
+  ArticleUserStore(article: ID!, store: Boolean!): BooleanMessage
+  """Авторизация как гость."""
+  AuthAsGuest(
+    """ID моб. устройства"""
+    device_id: String!
+  ): UserLoginType!
+  ChangePasswordUser(current: String!, password: String!, password_confirmation: String!): Boolean
+  DeleteUser: Boolean
+  EmailVerificationUser(code: String!): Boolean
+  LoginUser(device_id: String, password: String!, username: String!): UserLoginType
+  LogoutUser: Boolean
+  MarkAlert(action: AlertActionEnum!, id: ID!): BooleanMessage
+  RefreshTokenUser(refresh_token: String!): UserLoginType
+  RegisterUser(device_id: String, email: String!, first_name: String, last_name: String, middle_name: String, password: String!, password_confirmation: String!, telegram: String): UserLoginType
+  ResendEmailVerificationUser: Boolean
+  SetTranslate(lang: String!): Boolean
+  """Авторизация через соц сети для мобил."""
+  SocialAuthMobile(
+    """Токен авторизации"""
+    code: String!
+    """ID моб. устройства"""
+    device_id: String
+    """Тип соц сети. Доступно: google, facebook, apple"""
+    provider: String!
+  ): UserLoginType!
+  """Метод принимает массив настроек для персональной ленты новостей."""
+  UserArticlesPersonalSettings(
+    """Список настроек для сохранения интересов."""
+    settings: [UserPersonalSettingsInput]!
+  ): BooleanMessage
+  """
+  Метод позволяет подписаться или отписаться от рассылки для текущего домена.
+  """
+  UserChangeSubscription(
+    """Если хотим подписаться - true, если отписаться - false."""
+    subscribe: Boolean!
+    """Токен, если мы перешли через ссылку из письма."""
+    token: String
+  ): BooleanMessage
+  """
+  Метод для отправки ссылки для сброса пароля. На почту клиента приходит ссылка в виде {link}/{token}, {link}.
+  """
+  UserForgotPassword(email: String!, link: String!): Boolean
+  """
+  Метод принимает токен, ранее отправленный на почту в виде ссылки на фронт.
+  """
+  UserResetPassword(token: String!): Boolean
+  UserUpdate(id: ID!, user: UserUpdateInput!): UserTypeMessage
+  fcmTokenAdd(fcm_token: String!): Boolean!
+}
+
+type Page {
+  created_at: String!
+  """Список доменов к которым прекреплена страница"""
+  domains: [DomainType!]
+  id: ID!
+  """slug/uri страницы"""
+  slug: String!
+  """Перевод для контента страницы и поля для SEO."""
+  translate: PageTranslatesType!
+  """Переводы для контента страницы и поля для SEO."""
+  translates: [PageTranslatesType!]!
+  updated_at: String!
+}
+
+type PageData {
+  """список блоков."""
+  blocks: [BlockData!]!
+  """Страница для размещения."""
+  page: String!
+}
+
+input PageInput {
+  """Массив ид доменов"""
+  domains: [ID!]!
+  """slug/uri страницы"""
+  slug: String!
+  """Переводы для статических страниц."""
+  translates: [PageTranslatesInput!]!
+}
+
+type PagePagination {
+  """List of items on the current page"""
+  data: [Page]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+type PageSeoTemplate {
+  created_at: String!
+  """ID домена."""
+  domain_id: ID!
+  id: ID!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Перевод для шаблона."""
+  translate: PageSeoTemplateTranslates!
+  """Переводы для шаблона."""
+  translates: [PageSeoTemplateTranslates!]!
+  updated_at: String!
+}
+
+input PageSeoTemplateInput {
+  """ID домена."""
+  domain_id: ID!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Переводы шаблона."""
+  translates: [PageSeoTemplateTranslatesInput!]!
+}
+
+type PageSeoTemplateTranslates {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+  """URL страницы"""
+  url: String
+}
+
+input PageSeoTemplateTranslatesInput {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+  """URL страницы"""
+  url: String
+}
+
+input PageTranslatesInput {
+  """Контент."""
+  content: String!
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+}
+
+type PageTranslatesType {
+  """Контент."""
+  content: String!
+  created_at: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+  updated_at: String!
+}
+
+type PaginationMeta {
+  """Current page of the cursor"""
+  current_page: Int!
+  """Number of the first item returned"""
+  from: Int
+  """Determines if cursor has more pages after the current page"""
+  has_more_pages: Boolean!
+  """The last page (number of pages)"""
+  last_page: Int!
+  """Number of items returned per page"""
+  per_page: Int!
+  """Number of the last item returned"""
+  to: Int
+  """Number of total items selected by the query"""
+  total: Int!
+}
+
+type PermissionType {
+  id: ID! @deprecated(reason: "ID для permission запрашивать нельзя")
+  name: String
+}
+
+union PreferredInterest = AdminType | CategoryType | TagType
+
+type PublicDomainType {
+  articles: [ArticleType!]
+  """Черный логотип домена."""
+  black_logo: File
+  categories: [CategoryType!]
+  domain_social_links: [DomainSocialLinkType!]
+  """Favicon."""
+  favicon_large: File
+  """Favicon."""
+  favicon_medium: File
+  """Favicon."""
+  favicon_small: File
+  """Логотип домена в футере."""
+  footer_logo: File
+  id: ID!
+  """Логотип домена."""
+  logo: File
+  """Имя домена для админки"""
+  name: String!
+  setting: DomainSettingType
+  tags(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): TagTypePagination
+  trend_tags: [TagType!]
+  url: String!
+}
+
+type PublicDomainTypePagination {
+  """List of items on the current page"""
+  data: [PublicDomainType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+type Query {
+  Alerts(page: Int = 1, per_page: Int = 10): AlertMessageTypePagination
+  Articles(
+    """Фильтр по соавтору"""
+    author: ID
+    """Статті якого автора необхідно отримати"""
+    author_slug: String
+    """Фильтр по ид категории"""
+    category: ID
+    """Фильтр по слагу категории"""
+    category_slug: String
+    """Фильтр по ид домена"""
+    domain: ID
+    """ID статьи, которая не должна попасть в результат"""
+    exclude_article: ID
+    """Нужно ли исключить новости компании"""
+    exclude_company_news: Boolean
+    has_photos: Boolean
+    has_videos: Boolean
+    id: ID
+    is_day_top: Boolean
+    is_editor_choice: Boolean
+    """Фильтр по автору"""
+    owner: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    personal_articles: Boolean
+    popular_today: Boolean
+    """Дата в формате: Y-m-d. Пример: 2022-01-01"""
+    published_at: String
+    """
+    Дата в формате: Y-m-d (H:i:s). То, что в скобках - необязательно. Пример: 2022-01-01 12:54:45
+    """
+    published_from: String
+    """
+    Дата в формате: Y-m-d (H:i:s). То, что в скобках - необязательно (во время фильтрации НЕ включает границу ДО). Пример: 2022-01-01 12:54:45.
+    """
+    published_to: String
+    query: String
+    slug: String
+    """
+    Аргумент сортировки. Доступные поля: id, slug, status, created_at, published_at, scheduled_at, publish_also_in_fb, can_listen, is_day_top, is_editor_choice, owner_id, total_views, unique_views
+    """
+    sort: String
+    """Статус новости"""
+    status: String
+    """Фильтр по ид тега"""
+    tag: ID
+    """Фильтр по слагу тега"""
+    tag_slug: String
+  ): ArticleTypePagination
+  Authors(
+    id: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    slug: String
+    """
+    Аргумент сортировки. Доступные поля: id, name, phone, email, created_at
+    """
+    sort: String
+  ): AdminTypePagination
+  BlocksList(
+    domains: [ID!]
+    id: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    page_name: String
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    slug: String
+    """
+    Аргумент сортировки. Доступные поля: id, url, slug, is_active, active_to
+    """
+    sort: String
+  ): BlockPagination
+  Categories(
+    domain_id: ID
+    has_sub_categories: Boolean
+    hide_from_main_page: Boolean
+    """Запрашиваемая страница"""
+    page: Int = 1
+    parent: ID
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    slug: String
+    """
+    Аргумент сортировки. Доступные поля: id, position, position_in_main_page, created_at, domain_id
+    """
+    sort: String
+  ): CategoryTypePagination
+  """Список доменов для фронта"""
+  DomainsList(
+    id: ID
+    only_current: Boolean
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    """Аргумент сортировки. Доступные поля: id, name, url"""
+    sort: String
+  ): PublicDomainTypePagination
+  ImageSizesDictionary: [ImageSize!]!
+  Languages: [LanguageType]
+  PagesList(
+    domains: [ID!]
+    id: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    slug: String
+    """Аргумент сортировки. Доступные поля: id, slug"""
+    sort: String
+  ): PagePagination
+  PreferredInterests(created_at: String, id: ID, page: Int, per_page: Int, updated_at: String): [PreferredInterest!]!
+  SocialLoginRedirect(
+    """Список возможных провайдеров: google, facebook, apple"""
+    provider: String!
+  ): SocialLoginRedirectType
+  SpecialTags(
+    id: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    """Аргумент сортировки. Доступные поля: id, created_at, updated_at"""
+    sort: String
+  ): SpecialTagTypePagination
+  StoredArticles(
+    """Новости с видео или без"""
+    has_videos: Boolean
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    """Дата в формате: Y-m-d H:i:s. Пример: 2022-01-01 12:54:45"""
+    published_from: String
+    """Дата в формате: Y-m-d H:i:s. Пример: 2022-01-01 12:54:45"""
+    published_to: String
+    """
+    Аргумент сортировки. Доступные поля: id, slug, status, created_at, published_at, scheduled_at, publish_also_in_fb, can_listen, is_day_top, is_editor_choice, owner_id, total_views, unique_views
+    """
+    sort: String
+  ): ArticleTypePagination
+  TagSeoQuery(for_tag: String!): SeoType!
+  Tags(
+    """Фильтр по ид домена"""
+    domain: ID
+    id: ID
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+    query: String
+    slug: String
+    """Аргумент сортировки. Доступные поля: slug, created_at"""
+    sort: String
+  ): TagTypePagination
+  TopArticlesToday(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): ArticleTypePagination
+  TranslatesSimple(lang: [String]!, place: [String]!): [TranslateType]
+  UserHasUnreadNotifications: BooleanMessage
+  UserProfile: UserProfileType
+  UserStoredArticlesCount: IntMessage
+  homePageCategoryBlock(domain_id: ID): HomePageCategoryBlockType!
+  """Получение хеша переводов для конкретного языка"""
+  mobileTranslatesHash(
+    """Слаг языка"""
+    lang: String
+  ): String!
+  newsColumn(
+    """Фильтр по ID домена"""
+    domain_id: ID
+  ): [ArticleCardType!]
+}
+
+"""Сообщение для отображения на фронте."""
+type ResponseMessageType {
+  message: String!
+  """Возможные варианты: success, error, warning"""
+  type: MessageTypeEnum!
+}
+
+type ResponsiveImageSize {
+  """Высота картинки."""
+  height: Int!
+  """slug изображения"""
+  slug: String!
+  """Ссылка на файл."""
+  url: String
+  """Ширина картинки."""
+  width: Int!
+}
+
+input RoleTranslateInputType {
+  """Language"""
+  language: String!
+  """Название"""
+  title: String!
+}
+
+type RoleTranslateType {
+  id: ID!
+  language: String!
+  title: String!
+}
+
+type RoleType {
+  created_at: String!
+  id: ID!
+  isForOwner: Boolean!
+  name: String!
+  """Список возможных разрешений для текущей модели."""
+  permission: [String]
+  permissions: [PermissionType]!
+  translate: RoleTranslateType!
+  translates: [RoleTranslateType]!
+  updated_at: String!
+}
+
+type SeoRedirect {
+  created_at: String!
+  """Domain id."""
+  domain_id: ID!
+  """Статус HTTP кода"""
+  http_status_code: String!
+  id: ID!
+  """Опубликован ли редирект."""
+  is_published: Boolean!
+  """Название редиректа."""
+  name: String!
+  updated_at: String!
+  """Откуда редиректить."""
+  url_from: String!
+  """Куда редиректить."""
+  url_to: String!
+}
+
+input SeoRedirectInput {
+  """Domain id."""
+  domain_id: ID!
+  """Статус HTTP кода"""
+  http_status_code: Int!
+  """Опубликован ли редирект."""
+  is_published: Boolean!
+  """Название редиректа."""
+  name: String!
+  """Откуда редиректить."""
+  url_from: String!
+  """Куда редиректить."""
+  url_to: String!
+}
+
+type SeoType {
+  """seo description"""
+  seo_description: String
+  """seo h1"""
+  seo_h1: String
+  """seo title"""
+  seo_title: String
+}
+
+type SocialLinkType {
+  """Could be null"""
+  icon: String
+  id: ID!
+  position: Int!
+  title: String!
+}
+
+type SocialLoginRedirectType {
+  """сгенерированный урл для редиректа."""
+  redirect_url: String!
+}
+
+input SpecialTagInput {
+  """Переводы тега."""
+  translates: [SpecialTagTranslatesInput!]!
+}
+
+input SpecialTagTranslatesInput {
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+}
+
+type SpecialTagTranslatesType {
+  created_at: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+  updated_at: String!
+}
+
+type SpecialTagType {
+  created_at: String!
+  id: ID!
+  """Перевод тега."""
+  translate: SpecialTagTranslatesType!
+  """Переводы тега."""
+  translates: [SpecialTagTranslatesType!]!
+  updated_at: String!
+}
+
+type SpecialTagTypePagination {
+  """List of items on the current page"""
+  data: [SpecialTagType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+input TagInput {
+  """Чи додавати сторінку з цим тегом до sitemap"""
+  add_to_sitemap: Boolean!
+  """Slug тега"""
+  slug: String!
+  """Переводы тега."""
+  translates: [TagTranslatesInput!]!
+}
+
+type TagLabelTranslatesType {
+  """Язык перевода."""
+  language: String!
+  """Перевод."""
+  title: String!
+}
+
+type TagLabelType {
+  id: ID!
+  slug: String!
+  """Перевод тега."""
+  translate: TagLabelTranslatesType!
+}
+
+type TagSeoTemplate {
+  created_at: String!
+  """Домен."""
+  domain: DomainType!
+  id: ID!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Перевод для шаблона."""
+  translate: TagSeoTemplateTranslates!
+  """Переводы для шаблона."""
+  translates: [TagSeoTemplateTranslates!]!
+  updated_at: String!
+}
+
+input TagSeoTemplateInput {
+  """Домен ID."""
+  domain_id: Int!
+  """Опубликован ли шаблон."""
+  is_published: Boolean!
+  """Название шаблона."""
+  name: String!
+  """Переводы тега."""
+  translates: [TagSeoTemplateTranslatesInput!]!
+}
+
+type TagSeoTemplateTranslates {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+}
+
+input TagSeoTemplateTranslatesInput {
+  """Description"""
+  description: String
+  """H1"""
+  h1: String
+  """Язык перевода"""
+  language: String!
+  """Text"""
+  text: String
+  """Title"""
+  title: String
+}
+
+input TagTranslatesInput {
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+}
+
+type TagTranslatesType {
+  created_at: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  """Содержимое SEO description тега."""
+  seo_description: String
+  """Содержимое SEO H1 тега."""
+  seo_h1: String
+  """Содержимое SEO title тега."""
+  seo_title: String
+  """Перевод."""
+  title: String!
+  updated_at: String!
+}
+
+type TagType {
+  """Чи додавати сторінку з цим тегом до sitemap"""
+  add_to_sitemap: Boolean!
+  created_at: String!
+  id: ID!
+  """Является ли сущность предпочитаемой для персональной ленты новостей."""
+  is_preferred: Boolean!
+  """Slug тега (war, fun, fun)."""
+  slug: String!
+  """Общее количество просмотров тега."""
+  total_views(
+    """Идентификатор домена, для которого нужна статистика."""
+    domain_id: ID
+  ): Int!
+  """Перевод тега."""
+  translate: TagTranslatesType!
+  """Переводы тега."""
+  translates: [TagTranslatesType!]!
+  """Количество уникальных просмотров тега."""
+  unique_views(
+    """Идентификатор домена, для которого нужна статистика."""
+    domain_id: ID
+  ): Int!
+  updated_at: String!
+}
+
+type TagTypePagination {
+  """List of items on the current page"""
+  data: [TagType]
+  """Pagination meta data"""
+  meta: PaginationMeta
+}
+
+type TranslateType {
+  key: String!
+  lang: String!
+  place: String!
+  text: String
+}
+
+"""
+The `Upload` special type represents a file to be uploaded in the same HTTP request as specified by
+ [graphql-multipart-request-spec](https://github.com/jaydenseric/graphql-multipart-request-spec).
+"""
+scalar Upload
+
+type UserArticlesPersonalSettings {
+  """Модель для настройки."""
+  model: String!
+  """ID модели для настройки."""
+  model_id: Int!
+  """Правило (include/exclude) по умолчанию include."""
+  rule: String!
+}
+
+"""Список возможных значений моделей для персональных новостей."""
+enum UserArticlesPersonalSettingsModelEnum {
+  admin
+  category
+  tag
+}
+
+"""Список возможных правил персонализированных настроек новостей."""
+enum UserArticlesPersonalSettingsRuleEnum {
+  exclude
+  include
+}
+
+type UserLoginType {
+  access_token: String!
+  expires_in: Int!
+  refresh_expires_in: Int!
+  refresh_token: String!
+  token_type: String!
+  user: UserProfileType
+}
+
+"""Список всех возможных разрешений для типа: graph_user"""
+enum UserPermissionEnum {
+  fcm_add
+  role_list
+}
+
+input UserPersonalSettingsInput {
+  """Модель для настройки."""
+  model: UserArticlesPersonalSettingsModelEnum
+  """ID модели для настройки."""
+  model_id: Int!
+  """Правило фильтрации, по умолчанию include."""
+  rule: UserArticlesPersonalSettingsRuleEnum
+}
+
+type UserProfileType {
+  articles_personal_settings: [UserArticlesPersonalSettings!]
+  """Может ли пользователь сменить пароль"""
+  can_change_password: Boolean!
+  """Главное фото."""
+  cover: File
+  device_id: String
+  email: String!
+  email_verified_at: String
+  first_name: String
+  id: ID!
+  """Зарегистрирован ли пользователь через facebook."""
+  is_registered_by_facebook: Boolean!
+  """Зарегистрирован ли пользователь через соц. сеть."""
+  is_registered_by_social: Boolean!
+  """Подписан ли пользователь для текущего домена на рассылку."""
+  is_subscribed_for_subscription_in_current_domain: Boolean!
+  lang: String
+  language: LanguageType
+  last_name: String
+  liked_articles(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): ArticleTypePagination
+  middle_name: String
+  permissions: [PermissionType]
+  phone: String
+  stored_articles(
+    """Запрашиваемая страница"""
+    page: Int = 1
+    """Количество записей на одной странице."""
+    per_page: Int = 15
+  ): ArticleTypePagination
+  telegram: String
+}
+
+type UserType {
+  created_at: String!
+  email: String!
+  first_name: String
+  id: ID!
+  lang: String
+  last_name: String
+  middle_name: String
+  """Список возможных разрешений для текущей модели."""
+  permission: [String]
+  roles: [RoleType]
+  telegram: String
+  updated_at: String!
+}
+
+type UserTypeMessage {
+  data: UserType
+  message: String
+  """Возможные варианты: success, error, warning"""
+  type: MessageTypeEnum
+}
+
+input UserUpdateInput {
+  """Имя пользователя"""
+  first_name: String
+  """Фамилия пользователя"""
+  last_name: String
+  """Пароль пользователя"""
+  password: String
+  """Повтор пароля пользователя"""
+  password_confirmation: String
+  """Номер телефона пользователя"""
+  phone: String
+  """Telegram пользователя"""
+  telegram: String
+}
+
+type VideoLink {
+  """Главное фото."""
+  cover: File
+  created_at: String!
+  id: ID!
+  """Ссылка."""
+  link: String!
+  """Ссылка для мобильного приложения."""
+  link_mobile: String!
+  """Перевод для видео."""
+  translate: VideoLinkTranslates!
+  """Переводы для видео."""
+  translates: [VideoLinkTranslates!]!
+  updated_at: String!
+}
+
+input VideoLinkAttachImagesInput {
+  id: ID!
+  images: [FileInput!]!
+  images_type: VideoLinkMediaCollectionEnum!
+}
+
+input VideoLinkDetachImagesInput {
+  id: ID!
+  images: [ID]!
+  images_type: VideoLinkMediaCollectionEnum!
+}
+
+input VideoLinkInput {
+  """ID (нужно во время редактирования)."""
+  id: ID
+  """Ссылка."""
+  link: String!
+  """Ссылка для мобильного приложения."""
+  link_mobile: String
+  """Переводы для видео."""
+  translates: [VideoLinkTranslatesInput!]!
+}
+
+"""Список возможных типов изображений."""
+enum VideoLinkMediaCollectionEnum {
+  cover
+}
+
+type VideoLinkTranslates {
+  """Подпись."""
+  caption: String
+  created_at: String!
+  id: ID!
+  """Язык перевода."""
+  language: String!
+  updated_at: String!
+}
+
+input VideoLinkTranslatesInput {
+  """Подпись видео."""
+  caption: String
+  """Язык перевода."""
+  language: String!
+}
+
+union adminLoginUnion = AdminLoginType | twoFactoryConfirmation
+
+type twoFactoryConfirmation {
+  message: String!
+  twoFa: Boolean!
+}

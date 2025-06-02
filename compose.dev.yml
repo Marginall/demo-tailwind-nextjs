@@ -1,0 +1,14 @@
+services:
+    dev:
+        build:
+            dockerfile: docker/dev.dockerfile
+            args:
+                - WORKDIR=${DEV_DOCKER_WORKDIR}
+        container_name: ${DEV_DOCKER_CONTAINER}
+        hostname: ${DEV_DOCKER_HOSTNAME}
+        tty: true
+        volumes:
+            - ./:${DEV_DOCKER_WORKDIR}
+        ports:
+            - '3000:3000'
+            - '6006:6006'

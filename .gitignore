@@ -1,0 +1,51 @@
+# This file contains the most common exclusions for all workspaces
+# Specific workspaces may have additional exclusions that are not listed here
+
+# Dependencies
+node_modules
+.pnp
+.pnp.js
+
+# Testing
+coverage
+
+# Turbo
+.turbo
+
+# Vercel
+.vercel
+
+# Build Outputs
+.next/
+out/
+build
+dist
+.tsbuildinfo
+cache/
+logs/
+next-env.d.ts
+
+
+# Debug
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.DS_Store
+.cache
+.refs
+.tmp
+*.pem
+.idea
+
+# local env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# docker
+Dockerfile
+docker-compose.yml
