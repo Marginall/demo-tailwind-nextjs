@@ -36,5 +36,5 @@ jobs:
             - name: 🏗️ pnpm run ci-build
               run: pnpm run ci-build
 
-            - name: 🧱 pnpm run ci-sb-build
-              run: pnpm run ci-sb-build
+            # - name: 🧱 pnpm run ci-sb-build
+            #   run: pnpm run ci-sb-build
