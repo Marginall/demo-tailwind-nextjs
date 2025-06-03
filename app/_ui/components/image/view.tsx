@@ -40,7 +40,7 @@ export function UiImage({
 				src={src || defaultImage}
 				width={width}
 				height={height}
-				alt={alt || ''}
+				alt={alt || 'No image'}
 				title={title || undefined}
 				className={clsx(
 					'block w-full h-auto transition-opacity',

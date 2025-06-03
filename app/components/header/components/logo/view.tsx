@@ -11,7 +11,7 @@ export async function Logo({ image }: LogoProps): Promise<ReactElement> {
 	const t = await getI18n();
 
 	return pathname === '/' ? (
-		<div className={'flex align-center gap-[20px] no-underline'}>
+		<div {...getTestid('logo')} className={'flex align-center gap-[20px] no-underline'}>
 			<UiImage src={image} alt={t('logo__text')} width={118} height={53} loading={'eager'} />
 			<span className={'text-xs text-lh line-clamp-2 leading-none text-white tracking-[-2%]'}>
 				{t('logo__text')}
