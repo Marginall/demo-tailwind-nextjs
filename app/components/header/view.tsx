@@ -13,6 +13,7 @@ import { uk } from 'date-fns/locale/uk';
 import { getI18n } from '@/_library/i18n/server';
 import { UiLink } from '@/_ui/components/link';
 import { UiSvgIcon } from '@/_ui/components/svg/icon';
+import { HeaderSearch } from './components/search/view';
 
 export async function Header(): Promise<ReactElement> {
 	const { logo, navCategories, weather, currency, trendTags, socials } = await useHeader();
@@ -20,7 +21,7 @@ export async function Header(): Promise<ReactElement> {
 
 	return (
 		<>
-			<header id={'header'} {...getTestid('header')} className={'w-full bg-black/90'}>
+			<header id={'header'} {...getTestid('header')} className={'w-full bg-black/90 inline'}>
 				<UiContainer className={'pr-10'}>
 					<div
 						{...getTestid('header-top')}
@@ -31,7 +32,7 @@ export async function Header(): Promise<ReactElement> {
 								<Logo image={logo} />
 								<div className={'text-white pl-[40px] pr-[63px]'}>Україна</div>
 							</div>
-							<div className={'w-[77%] bg-white/30 py-4 px-5 rounded-sm'}>2</div>
+							<HeaderSearch />
 						</div>
 						<div className={'flex justify-end items-center w-[440px]'}>
 							<div className={'flex items-center md:gap-[10px]'}>

@@ -2452,3 +2452,20 @@ export type GetCommonDataQuery = {
 		}> | null;
 	}> | null;
 };
+
+export type SearchQueryVariables = Exact<{
+	query: Scalars['String']['input'];
+}>;
+
+export type SearchQuery = {
+	__typename?: 'Query';
+	items?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+		} | null> | null;
+	} | null;
+};

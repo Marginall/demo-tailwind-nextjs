@@ -1,2 +1,2 @@
-export const commonSymbols = ['person', 'telegram', 'rss', 'facebook', 'menu', 'hot', 'video'] as const;
+export const commonSymbols = ['person', 'telegram', 'rss', 'facebook', 'menu', 'hot', 'video', 'search'] as const;
 export type CommonSymbol = (typeof commonSymbols)[number];
