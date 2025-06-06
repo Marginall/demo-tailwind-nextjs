@@ -72,7 +72,7 @@ export const SearchPopover: React.FC<SearchPopoverProps> = ({ onOpenChange, isOp
 			<DrawerContent className='rounded-none max-w-none max-md:h-full max-h-none w-full pb-10 bg-black'>
 				{(onClose) => (
 					<>
-						<div className='mb-5 md:mb-10 max-md:shadow-medium max-md:pb-2 max-md:pt-3'>
+						<div className='mb-5'>
 							<UiContainer>
 								<div className='flex justify-end mb-4 md:mb-1.5 md:mt-2'>
 									<UiButton variant='solid' onPress={onClose} className='text-white'>
