@@ -2116,7 +2116,7 @@ export type TwoFactoryConfirmation = {
 	twoFa: Scalars['Boolean']['output'];
 };
 
-export type NewsPageFragmentFragment = {
+export type NewsPageFragment = {
 	__typename?: 'ArticleType';
 	id: string;
 	slug: string;
@@ -2410,7 +2410,7 @@ export type ArticleQueryVariables = Exact<{
 
 export type ArticleQuery = {
 	__typename?: 'Query';
-	Item?: {
+	ArticlePageData?: {
 		__typename?: 'ArticleTypePagination';
 		data?: Array<{
 			__typename?: 'ArticleType';

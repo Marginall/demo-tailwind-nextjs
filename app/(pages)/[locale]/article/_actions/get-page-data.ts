@@ -1,16 +1,14 @@
 'use server';
 
 import { getServerApollo } from '@/_library/apollo/server';
-import { ArticleQuery, ArticleQueryVariables, NewsPageFragmentFragment } from '@/_library/graphql';
+import { ArticleQuery, ArticleQueryVariables } from '@/_library/graphql';
 import { ARTICLE } from '../gql';
+import { arrayGetFirstNotNullableItem } from '@wezom/toolkit-array';
+import { GetArticlePageDataResponse } from '../types';
 
 interface GetArticlePageDataProps {
 	locale: string;
 	slug?: string;
-}
-
-export interface GetArticlePageDataResponse {
-	page: NewsPageFragmentFragment | null;
 }
 
 export async function getPageData({ locale, slug }: GetArticlePageDataProps): Promise<GetArticlePageDataResponse> {
@@ -31,25 +29,21 @@ export async function getPageData({ locale, slug }: GetArticlePageDataProps): Pr
 					},
 				},
 			});
-			console.log(222, data);
 
 			if (errors) {
 				errors.forEach((error) => {
 					console.error(error);
 				});
 			}
-			console.log(123, data);
 
-			// if (data.Articles.data && data.Articles.data.length > 0) {
-			// 	const item = arrayGetFirstNotNullableItem(data.Articles.data);
-			// 	if (item) {
-			// 		return {
-			// 			page: {
-			// 				data: item,
-			// 			},
-			// 		};
-			// 	}
-			// }
+			if (data.ArticlePageData && data.ArticlePageData.data && data.ArticlePageData.data.length > 0) {
+				const article = arrayGetFirstNotNullableItem(data.ArticlePageData.data);
+				if (article) {
+					return {
+						page: article,
+					};
+				}
+			}
 		} else {
 			return {
 				page: null,

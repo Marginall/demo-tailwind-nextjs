@@ -11,7 +11,7 @@ export default async function Homepage(): Promise<ReactElement> {
 	return (
 		<>
 			{/* {metadata && <DocumentMetadata {...metadata} />} */}
-			<UiContainer>
+			<UiContainer className={'py-5'}>
 				<div className={'flex bg-white drop-shadow-[0_0_40px_rgba(0,0,0,0.05)]'}>
 					<div className={'flex-grow'}>121</div>
 					<div className={'w-[409px]'}>

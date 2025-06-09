@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { uk } from 'date-fns/locale/uk';
 import { UiSvgIcon } from '@/_ui/components/svg/icon';
 import { UiLink } from '@/_ui/components/link';
+import { routeArticleSlug } from '@/(pages)/[locale]/article/[slug]/_route';
 
 export function Card({ data }: CardProps) {
 	return (
@@ -21,7 +22,11 @@ export function Card({ data }: CardProps) {
 			/>
 			<div className={'flex flex-col justify-between'}>
 				<UiLink
-					href={`/article/${data.translate.slug}`}
+					href={routeArticleSlug.buildHref({
+						segments: {
+							slug: data.translate.slug,
+						},
+					})}
 					className={'text-md font-medium leading-none hover:text-[#fe4444] transition-colors duration-300'}
 				>
 					{data.translate.title}
