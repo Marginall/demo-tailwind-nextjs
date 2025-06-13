@@ -53,11 +53,13 @@
     "date-fns": "^4.1.0",
     "dotenv-flow": "^4.1.0",
     "framer-motion": "11.17.0",
+    "html-react-parser": "^5.2.5",
     "next": "^15.1.4",
     "next-intl": "^3.26.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
@@ -74,6 +76,8 @@
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/dotenv-flow": "^3.3.3",
+    "@types/jest": "^29.5.14",
+    "@types/mocha": "^10.0.10",
     "@vitejs/plugin-react": "^4.3.4",
     "@vitest/coverage-istanbul": "^2.1.8",
     "autoprefixer": "10.4.20",

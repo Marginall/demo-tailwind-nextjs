@@ -19,7 +19,7 @@ export async function useHeader(): Promise<HeaderModel> {
 			name: locale.toUpperCase(),
 			url: locale === currentLocale ? null : locale === DEFAULT_LOCALE ? pathname : `/${locale}${pathname}`,
 		})),
-		navCategories,
+		navCategories: navCategories ? [...navCategories].slice(0, 10) : [],
 		logo:
 			currentDomain && currentDomain.logo && currentDomain.logo.original_url
 				? currentDomain.logo.original_url

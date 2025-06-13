@@ -17,12 +17,12 @@ export function List({ data, translate }: ListProps): ReactElement {
 						{!showAllCards && i < 10 ? (
 							<>
 								<Card key={record.id} data={record} />
-								{!showAllCards && i < 9 ? <div>111</div> : null}
+								{!showAllCards && i < 9 ? <div className={'border-b border-gray-300'}></div> : null}
 							</>
 						) : showAllCards ? (
 							<>
 								<Card key={record.id} data={record} />
-								{i < data.length ? <div>111</div> : null}
+								{i < data.length - 1 ? <div className={'border-b border-gray-300'}></div> : null}
 							</>
 						) : null}
 					</React.Fragment>

@@ -6,6 +6,7 @@ import { TelegramSymbol } from './components/telegram';
 import { MenuSymbol } from './components/menu';
 import { HotSymbol } from './components/hot';
 import { VideoSymbol } from './components/video';
+import { SearchSymbol } from './components/search';
 
 export function UiSvgSpriteCommon(): ReactElement {
 	return (
@@ -18,6 +19,7 @@ export function UiSvgSpriteCommon(): ReactElement {
 				<MenuSymbol />
 				<HotSymbol />
 				<VideoSymbol />
+				<SearchSymbol />
 			</svg>
 		</div>
 	);

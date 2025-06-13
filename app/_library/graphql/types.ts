@@ -961,6 +961,24 @@ export type DomainSocialLinkType = {
 	url: Scalars['String']['output'];
 };
 
+export type DomainTagType = {
+	__typename?: 'DomainTagType';
+	/** Добавлять ли страницу с этим тегом в sitemap домена. */
+	add_to_sitemap: Scalars['Boolean']['output'];
+	/** Домен. */
+	domain: DomainType;
+	/** ID домена. */
+	domain_id: Scalars['ID']['output'];
+	/** Тег. */
+	tag: TagType;
+	/** ID тега. */
+	tag_id: Scalars['ID']['output'];
+	/** Общее количество просмотров тега в данном домене. */
+	total_views: Scalars['Int']['output'];
+	/** Количество уникальных просмотров тега в данном домене. */
+	unique_views: Scalars['Int']['output'];
+};
+
 export type DomainType = {
 	__typename?: 'DomainType';
 	articles?: Maybe<Array<ArticleType>>;
@@ -1764,9 +1782,16 @@ export type SpecialTagTypePagination = {
 	meta?: Maybe<PaginationMeta>;
 };
 
+export type TagDomainSettingInput = {
+	/** Чи додавати сторінку з цим тегом до sitemap цього домену */
+	add_to_sitemap?: InputMaybe<Scalars['Boolean']['input']>;
+	/** ID домена */
+	domain_id: Scalars['ID']['input'];
+};
+
 export type TagInput = {
-	/** Чи додавати сторінку з цим тегом до sitemap */
-	add_to_sitemap: Scalars['Boolean']['input'];
+	/** Налаштування тегу для різних доменів */
+	domain_settings: Array<TagDomainSettingInput>;
 	/** Slug тега */
 	slug: Scalars['String']['input'];
 	/** Переводы тега. */
@@ -1876,9 +1901,11 @@ export type TagTranslatesType = {
 
 export type TagType = {
 	__typename?: 'TagType';
-	/** Чи додавати сторінку з цим тегом до sitemap */
+	/** Чи додавати сторінку з цим тегом до sitemap цього домену. Це поле запитувати лише в адмінці! */
 	add_to_sitemap: Scalars['Boolean']['output'];
 	created_at: Scalars['String']['output'];
+	/** Связь тега с доменом (DomainTag). Возвращает null если связи нет. */
+	domainTags: Array<Maybe<DomainTagType>>;
 	id: Scalars['ID']['output'];
 	/** Является ли сущность предпочитаемой для персональной ленты новостей. */
 	is_preferred: Scalars['Boolean']['output'];
@@ -1893,6 +1920,10 @@ export type TagType = {
 	/** Количество уникальных просмотров тега. */
 	unique_views: Scalars['Int']['output'];
 	updated_at: Scalars['String']['output'];
+};
+
+export type TagTypeAdd_To_SitemapArgs = {
+	domain_id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type TagTypeTotal_ViewsArgs = {
@@ -2114,6 +2145,514 @@ export type TwoFactoryConfirmation = {
 	__typename?: 'twoFactoryConfirmation';
 	message: Scalars['String']['output'];
 	twoFa: Scalars['Boolean']['output'];
+};
+
+export type NewsPageFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	is_stored: boolean;
+	is_liked: boolean;
+	published_at?: string | null;
+	updated_at: string;
+	total_views: number;
+	unique_views: number;
+	can_listen: boolean;
+	expected_reading_time?: number | null;
+	stored_count: number;
+	liked_count: number;
+	special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+	owner: {
+		__typename?: 'AdminType';
+		id: string;
+		name: string;
+		has_owned_page: boolean;
+		cover?: { __typename?: 'File'; url?: string | null } | null;
+		roles?: Array<{
+			__typename?: 'RoleType';
+			name: string;
+			translate: { __typename?: 'RoleTranslateType'; title: string };
+		} | null> | null;
+		translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+	};
+	authors?: Array<{
+		__typename?: 'AdminType';
+		id: string;
+		name: string;
+		has_owned_page: boolean;
+		cover?: { __typename?: 'File'; url?: string | null } | null;
+		roles?: Array<{
+			__typename?: 'RoleType';
+			name: string;
+			translate: { __typename?: 'RoleTranslateType'; title: string };
+		} | null> | null;
+		translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+	}> | null;
+	categories: Array<{
+		__typename?: 'CategoryType';
+		color: string;
+		slug: string;
+		translate: { __typename?: 'CategoryTranslatesType'; title: string };
+	}>;
+	tags?: Array<{
+		__typename?: 'TagType';
+		slug: string;
+		translate: { __typename?: 'TagTranslatesType'; title: string };
+	}> | null;
+	translate: {
+		__typename?: 'ArticleTranslatesType';
+		title: string;
+		lead_paragraph?: string | null;
+		content: string;
+		key_points?: string | null;
+		seo_keywords?: string | null;
+	};
+	cover?: {
+		__typename?: 'File';
+		alt?: string | null;
+		url?: string | null;
+		caption?: string | null;
+		original_url?: string | null;
+		mime_type?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+	carousel_images?: Array<{
+		__typename?: 'File';
+		url?: string | null;
+		alt?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null> | null;
+	video_links?: Array<{
+		__typename?: 'VideoLink';
+		id: string;
+		link: string;
+		translate: { __typename?: 'VideoLinkTranslates'; caption?: string | null };
+		cover?: {
+			__typename?: 'File';
+			alt?: string | null;
+			url?: string | null;
+			responsive_images_as_array: Array<{
+				__typename?: 'ResponsiveImageSize';
+				url?: string | null;
+				width: number;
+			}>;
+		} | null;
+	}> | null;
+	similar_articles?: Array<{
+		__typename?: 'ArticleType';
+		id: string;
+		slug: string;
+		is_stored: boolean;
+		is_liked: boolean;
+		published_at?: string | null;
+		updated_at: string;
+		total_views: number;
+		unique_views: number;
+		stored_count: number;
+		liked_count: number;
+		can_listen: boolean;
+		expected_reading_time?: number | null;
+		special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+		translate: {
+			__typename?: 'ArticleTranslatesType';
+			title: string;
+			lead_paragraph?: string | null;
+			content: string;
+			key_points?: string | null;
+		};
+		owner: {
+			__typename?: 'AdminType';
+			id: string;
+			name: string;
+			has_owned_page: boolean;
+			cover?: { __typename?: 'File'; url?: string | null } | null;
+			roles?: Array<{
+				__typename?: 'RoleType';
+				name: string;
+				translate: { __typename?: 'RoleTranslateType'; title: string };
+			} | null> | null;
+			translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+		};
+		authors?: Array<{
+			__typename?: 'AdminType';
+			id: string;
+			name: string;
+			has_owned_page: boolean;
+			cover?: { __typename?: 'File'; url?: string | null } | null;
+			roles?: Array<{
+				__typename?: 'RoleType';
+				name: string;
+				translate: { __typename?: 'RoleTranslateType'; title: string };
+			} | null> | null;
+			translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+		}> | null;
+		categories: Array<{
+			__typename?: 'CategoryType';
+			color: string;
+			slug: string;
+			translate: { __typename?: 'CategoryTranslatesType'; title: string };
+		}>;
+		tags?: Array<{
+			__typename?: 'TagType';
+			slug: string;
+			translate: { __typename?: 'TagTranslatesType'; title: string };
+		}> | null;
+		cover?: {
+			__typename?: 'File';
+			alt?: string | null;
+			url?: string | null;
+			caption?: string | null;
+			responsive_images_as_array: Array<{
+				__typename?: 'ResponsiveImageSize';
+				url?: string | null;
+				width: number;
+			}>;
+		} | null;
+		carousel_images?: Array<{
+			__typename?: 'File';
+			url?: string | null;
+			alt?: string | null;
+			responsive_images_as_array: Array<{
+				__typename?: 'ResponsiveImageSize';
+				url?: string | null;
+				width: number;
+			}>;
+		} | null> | null;
+		video_links?: Array<{
+			__typename?: 'VideoLink';
+			id: string;
+			link: string;
+			translate: { __typename?: 'VideoLinkTranslates'; caption?: string | null };
+			cover?: {
+				__typename?: 'File';
+				alt?: string | null;
+				url?: string | null;
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null;
+		}> | null;
+		seo: {
+			__typename?: 'SeoType';
+			seo_title?: string | null;
+			seo_h1?: string | null;
+			seo_description?: string | null;
+		};
+	}> | null;
+	seo: { __typename?: 'SeoType'; seo_title?: string | null; seo_h1?: string | null; seo_description?: string | null };
+};
+
+export type SimilarArticlesFragmentFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	is_stored: boolean;
+	is_liked: boolean;
+	published_at?: string | null;
+	updated_at: string;
+	total_views: number;
+	unique_views: number;
+	stored_count: number;
+	liked_count: number;
+	can_listen: boolean;
+	expected_reading_time?: number | null;
+	special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+	translate: {
+		__typename?: 'ArticleTranslatesType';
+		title: string;
+		lead_paragraph?: string | null;
+		content: string;
+		key_points?: string | null;
+	};
+	owner: {
+		__typename?: 'AdminType';
+		id: string;
+		name: string;
+		has_owned_page: boolean;
+		cover?: { __typename?: 'File'; url?: string | null } | null;
+		roles?: Array<{
+			__typename?: 'RoleType';
+			name: string;
+			translate: { __typename?: 'RoleTranslateType'; title: string };
+		} | null> | null;
+		translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+	};
+	authors?: Array<{
+		__typename?: 'AdminType';
+		id: string;
+		name: string;
+		has_owned_page: boolean;
+		cover?: { __typename?: 'File'; url?: string | null } | null;
+		roles?: Array<{
+			__typename?: 'RoleType';
+			name: string;
+			translate: { __typename?: 'RoleTranslateType'; title: string };
+		} | null> | null;
+		translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+	}> | null;
+	categories: Array<{
+		__typename?: 'CategoryType';
+		color: string;
+		slug: string;
+		translate: { __typename?: 'CategoryTranslatesType'; title: string };
+	}>;
+	tags?: Array<{
+		__typename?: 'TagType';
+		slug: string;
+		translate: { __typename?: 'TagTranslatesType'; title: string };
+	}> | null;
+	cover?: {
+		__typename?: 'File';
+		alt?: string | null;
+		url?: string | null;
+		caption?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+	carousel_images?: Array<{
+		__typename?: 'File';
+		url?: string | null;
+		alt?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null> | null;
+	video_links?: Array<{
+		__typename?: 'VideoLink';
+		id: string;
+		link: string;
+		translate: { __typename?: 'VideoLinkTranslates'; caption?: string | null };
+		cover?: {
+			__typename?: 'File';
+			alt?: string | null;
+			url?: string | null;
+			responsive_images_as_array: Array<{
+				__typename?: 'ResponsiveImageSize';
+				url?: string | null;
+				width: number;
+			}>;
+		} | null;
+	}> | null;
+	seo: { __typename?: 'SeoType'; seo_title?: string | null; seo_h1?: string | null; seo_description?: string | null };
+};
+
+export type ArticleQueryVariables = Exact<{
+	slug: Scalars['String']['input'];
+}>;
+
+export type ArticleQuery = {
+	__typename?: 'Query';
+	ArticlePageData?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			is_stored: boolean;
+			is_liked: boolean;
+			published_at?: string | null;
+			updated_at: string;
+			total_views: number;
+			unique_views: number;
+			can_listen: boolean;
+			expected_reading_time?: number | null;
+			stored_count: number;
+			liked_count: number;
+			special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+			owner: {
+				__typename?: 'AdminType';
+				id: string;
+				name: string;
+				has_owned_page: boolean;
+				cover?: { __typename?: 'File'; url?: string | null } | null;
+				roles?: Array<{
+					__typename?: 'RoleType';
+					name: string;
+					translate: { __typename?: 'RoleTranslateType'; title: string };
+				} | null> | null;
+				translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+			};
+			authors?: Array<{
+				__typename?: 'AdminType';
+				id: string;
+				name: string;
+				has_owned_page: boolean;
+				cover?: { __typename?: 'File'; url?: string | null } | null;
+				roles?: Array<{
+					__typename?: 'RoleType';
+					name: string;
+					translate: { __typename?: 'RoleTranslateType'; title: string };
+				} | null> | null;
+				translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+			}> | null;
+			categories: Array<{
+				__typename?: 'CategoryType';
+				color: string;
+				slug: string;
+				translate: { __typename?: 'CategoryTranslatesType'; title: string };
+			}>;
+			tags?: Array<{
+				__typename?: 'TagType';
+				slug: string;
+				translate: { __typename?: 'TagTranslatesType'; title: string };
+			}> | null;
+			translate: {
+				__typename?: 'ArticleTranslatesType';
+				title: string;
+				lead_paragraph?: string | null;
+				content: string;
+				key_points?: string | null;
+				seo_keywords?: string | null;
+			};
+			cover?: {
+				__typename?: 'File';
+				alt?: string | null;
+				url?: string | null;
+				caption?: string | null;
+				original_url?: string | null;
+				mime_type?: string | null;
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null;
+			carousel_images?: Array<{
+				__typename?: 'File';
+				url?: string | null;
+				alt?: string | null;
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null> | null;
+			video_links?: Array<{
+				__typename?: 'VideoLink';
+				id: string;
+				link: string;
+				translate: { __typename?: 'VideoLinkTranslates'; caption?: string | null };
+				cover?: {
+					__typename?: 'File';
+					alt?: string | null;
+					url?: string | null;
+					responsive_images_as_array: Array<{
+						__typename?: 'ResponsiveImageSize';
+						url?: string | null;
+						width: number;
+					}>;
+				} | null;
+			}> | null;
+			similar_articles?: Array<{
+				__typename?: 'ArticleType';
+				id: string;
+				slug: string;
+				is_stored: boolean;
+				is_liked: boolean;
+				published_at?: string | null;
+				updated_at: string;
+				total_views: number;
+				unique_views: number;
+				stored_count: number;
+				liked_count: number;
+				can_listen: boolean;
+				expected_reading_time?: number | null;
+				special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+				translate: {
+					__typename?: 'ArticleTranslatesType';
+					title: string;
+					lead_paragraph?: string | null;
+					content: string;
+					key_points?: string | null;
+				};
+				owner: {
+					__typename?: 'AdminType';
+					id: string;
+					name: string;
+					has_owned_page: boolean;
+					cover?: { __typename?: 'File'; url?: string | null } | null;
+					roles?: Array<{
+						__typename?: 'RoleType';
+						name: string;
+						translate: { __typename?: 'RoleTranslateType'; title: string };
+					} | null> | null;
+					translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+				};
+				authors?: Array<{
+					__typename?: 'AdminType';
+					id: string;
+					name: string;
+					has_owned_page: boolean;
+					cover?: { __typename?: 'File'; url?: string | null } | null;
+					roles?: Array<{
+						__typename?: 'RoleType';
+						name: string;
+						translate: { __typename?: 'RoleTranslateType'; title: string };
+					} | null> | null;
+					translate: { __typename?: 'AdminTranslatesType'; slug?: string | null; position?: string | null };
+				}> | null;
+				categories: Array<{
+					__typename?: 'CategoryType';
+					color: string;
+					slug: string;
+					translate: { __typename?: 'CategoryTranslatesType'; title: string };
+				}>;
+				tags?: Array<{
+					__typename?: 'TagType';
+					slug: string;
+					translate: { __typename?: 'TagTranslatesType'; title: string };
+				}> | null;
+				cover?: {
+					__typename?: 'File';
+					alt?: string | null;
+					url?: string | null;
+					caption?: string | null;
+					responsive_images_as_array: Array<{
+						__typename?: 'ResponsiveImageSize';
+						url?: string | null;
+						width: number;
+					}>;
+				} | null;
+				carousel_images?: Array<{
+					__typename?: 'File';
+					url?: string | null;
+					alt?: string | null;
+					responsive_images_as_array: Array<{
+						__typename?: 'ResponsiveImageSize';
+						url?: string | null;
+						width: number;
+					}>;
+				} | null> | null;
+				video_links?: Array<{
+					__typename?: 'VideoLink';
+					id: string;
+					link: string;
+					translate: { __typename?: 'VideoLinkTranslates'; caption?: string | null };
+					cover?: {
+						__typename?: 'File';
+						alt?: string | null;
+						url?: string | null;
+						responsive_images_as_array: Array<{
+							__typename?: 'ResponsiveImageSize';
+							url?: string | null;
+							width: number;
+						}>;
+					} | null;
+				}> | null;
+				seo: {
+					__typename?: 'SeoType';
+					seo_title?: string | null;
+					seo_h1?: string | null;
+					seo_description?: string | null;
+				};
+			}> | null;
+			seo: {
+				__typename?: 'SeoType';
+				seo_title?: string | null;
+				seo_h1?: string | null;
+				seo_description?: string | null;
+			};
+		} | null> | null;
+	} | null;
 };
 
 export type PagesListFragment = {
@@ -2451,4 +2990,21 @@ export type GetCommonDataQuery = {
 			translate: { __typename?: 'CategoryLabelTranslatesType'; title: string };
 		}> | null;
 	}> | null;
+};
+
+export type SearchQueryVariables = Exact<{
+	query: Scalars['String']['input'];
+}>;
+
+export type SearchQuery = {
+	__typename?: 'Query';
+	items?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+		} | null> | null;
+	} | null;
 };
