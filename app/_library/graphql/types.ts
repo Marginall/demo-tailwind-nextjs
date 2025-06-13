@@ -961,6 +961,24 @@ export type DomainSocialLinkType = {
 	url: Scalars['String']['output'];
 };
 
+export type DomainTagType = {
+	__typename?: 'DomainTagType';
+	/** Добавлять ли страницу с этим тегом в sitemap домена. */
+	add_to_sitemap: Scalars['Boolean']['output'];
+	/** Домен. */
+	domain: DomainType;
+	/** ID домена. */
+	domain_id: Scalars['ID']['output'];
+	/** Тег. */
+	tag: TagType;
+	/** ID тега. */
+	tag_id: Scalars['ID']['output'];
+	/** Общее количество просмотров тега в данном домене. */
+	total_views: Scalars['Int']['output'];
+	/** Количество уникальных просмотров тега в данном домене. */
+	unique_views: Scalars['Int']['output'];
+};
+
 export type DomainType = {
 	__typename?: 'DomainType';
 	articles?: Maybe<Array<ArticleType>>;
@@ -1764,9 +1782,16 @@ export type SpecialTagTypePagination = {
 	meta?: Maybe<PaginationMeta>;
 };
 
+export type TagDomainSettingInput = {
+	/** Чи додавати сторінку з цим тегом до sitemap цього домену */
+	add_to_sitemap?: InputMaybe<Scalars['Boolean']['input']>;
+	/** ID домена */
+	domain_id: Scalars['ID']['input'];
+};
+
 export type TagInput = {
-	/** Чи додавати сторінку з цим тегом до sitemap */
-	add_to_sitemap: Scalars['Boolean']['input'];
+	/** Налаштування тегу для різних доменів */
+	domain_settings: Array<TagDomainSettingInput>;
 	/** Slug тега */
 	slug: Scalars['String']['input'];
 	/** Переводы тега. */
@@ -1876,9 +1901,11 @@ export type TagTranslatesType = {
 
 export type TagType = {
 	__typename?: 'TagType';
-	/** Чи додавати сторінку з цим тегом до sitemap */
+	/** Чи додавати сторінку з цим тегом до sitemap цього домену. Це поле запитувати лише в адмінці! */
 	add_to_sitemap: Scalars['Boolean']['output'];
 	created_at: Scalars['String']['output'];
+	/** Связь тега с доменом (DomainTag). Возвращает null если связи нет. */
+	domainTags: Array<Maybe<DomainTagType>>;
 	id: Scalars['ID']['output'];
 	/** Является ли сущность предпочитаемой для персональной ленты новостей. */
 	is_preferred: Scalars['Boolean']['output'];
@@ -1893,6 +1920,10 @@ export type TagType = {
 	/** Количество уникальных просмотров тега. */
 	unique_views: Scalars['Int']['output'];
 	updated_at: Scalars['String']['output'];
+};
+
+export type TagTypeAdd_To_SitemapArgs = {
+	domain_id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type TagTypeTotal_ViewsArgs = {
