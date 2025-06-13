@@ -2,6 +2,10 @@ import { getLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { ReactElement } from 'react';
 import { getPageData } from './_actions/get-page-data';
+import { DocumentMetadata } from '@/_widgets/document-metadata';
+import { ArticleContent } from '@/components/article-content';
+import { UiContainer } from '@/_ui';
+import { Sidebar } from '@/components/sidebar';
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }): Promise<ReactElement> {
 	const { slug } = await params;
@@ -10,10 +14,27 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
 		locale,
 		slug,
 	});
-	console.log(123, data);
 
-	if (data) {
-		return <div>sdfsdfsdfsdf</div>;
+	const metadata = {
+		title: data.page?.translate.title,
+	};
+
+	if (data && data.page) {
+		return (
+			<>
+				{metadata && <DocumentMetadata {...metadata} />}
+				<UiContainer className={'py-5'}>
+					<div className={'flex bg-white drop-shadow-[0_0_40px_rgba(0,0,0,0.05)]'}>
+						<div className={'flex-grow'}>
+							<ArticleContent data={data.page} />
+						</div>
+						<div className={'w-[409px]'}>
+							<Sidebar />
+						</div>
+					</div>
+				</UiContainer>
+			</>
+		);
 	}
 
 	return notFound();

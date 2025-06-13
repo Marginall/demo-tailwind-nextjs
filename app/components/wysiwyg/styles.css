@@ -1,0 +1,143 @@
+.wysiwyg {
+	font-size: 15px;
+}
+
+@media (min-width: 1024px) {
+	.wysiwyg {
+		font-size: 16px;
+	}
+}
+
+.wysiwyg > *:first-child:not(.widget):not(.widget *) {
+	margin-top: 0;
+}
+
+.wysiwyg > *:last-child:not(.widget):not(.widget *) {
+	margin-bottom: 0;
+}
+
+.wysiwyg .h1:not(.widget):not(.widget *),
+.wysiwyg .h2:not(.widget):not(.widget *),
+.wysiwyg .h3:not(.widget):not(.widget *),
+.wysiwyg .h4:not(.widget):not(.widget *),
+.wysiwyg .h5:not(.widget):not(.widget *),
+.wysiwyg .h6:not(.widget):not(.widget *) {
+	margin-top: 1.78em;
+	margin-bottom: 0.89em;
+	font-weight: 600;
+	line-height: 1.25em;
+}
+
+.wysiwyg .h1:not(.widget):not(.widget *) {
+	font-size: 1.25em;
+}
+
+.wysiwyg .h2:not(.widget):not(.widget *) {
+	font-size: 1.125em;
+}
+
+.wysiwyg .h3:not(.widget):not(.widget *) {
+	font-size: 1.0625em;
+}
+
+.wysiwyg .h4:not(.widget):not(.widget *) {
+	font-size: 1em;
+}
+
+.wysiwyg .h5:not(.widget):not(.widget *) {
+	font-size: 0.9375em;
+}
+
+.wysiwyg .h6:not(.widget):not(.widget *) {
+	font-size: 0.875em;
+}
+
+.wysiwyg p:not(.widget):not(.widget *),
+.wysiwyg div:not(.widget):not(.widget *),
+.wysiwyg ul:not(.widget):not(.widget *),
+.wysiwyg ol:not(.widget):not(.widget *) {
+	font-size: 1em;
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	line-height: 1.52em;
+}
+
+.wysiwyg ol:not(.widget):not(.widget *) {
+	padding-left: 2.5rem;
+	list-style-type: decimal;
+}
+
+.wysiwyg ol:not(.widget):not(.widget *) li:not(.widget):not(.widget *) {
+	margin-top: 1rem;
+	padding-left: 0.25rem;
+}
+
+.wysiwyg ul:not(.widget):not(.widget *) {
+	padding-left: 1.25rem;
+	list-style-type: disc;
+}
+
+.wysiwyg ul:not(.widget):not(.widget *) li:not(.widget):not(.widget *) {
+	margin-top: 1rem;
+	padding-left: 0.5rem;
+}
+
+.wysiwyg a:not(.widget):not(.widget *) {
+	color: var(--color-primary, #2563eb);
+	text-decoration: none;
+}
+
+.wysiwyg a:not(.widget):not(.widget *):hover {
+	text-decoration: underline;
+}
+
+.wysiwyg blockquote:not(.widget):not(.widget *) {
+	margin-right: 0;
+	padding-left: 1.5em;
+	border-left: 2px solid var(--color-primary, #2563eb);
+	font-size: 0.875em;
+	line-height: 1.4em;
+}
+
+.wysiwyg img:not(.widget):not(.widget *),
+.wysiwyg audio:not(.widget):not(.widget *),
+.wysiwyg video:not(.widget):not(.widget *) {
+	max-width: 100%;
+}
+
+.wysiwyg .table:not(.widget):not(.widget *) {
+	display: block;
+	width: 100%;
+	overflow-x: auto;
+}
+
+.wysiwyg table:not(.widget):not(.widget *) {
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #d1d5db;
+	table-layout: fixed;
+}
+
+.wysiwyg table:not(.widget):not(.widget *) tbody,
+.wysiwyg table:not(.widget):not(.widget *) tfoot,
+.wysiwyg table:not(.widget):not(.widget *) thead,
+.wysiwyg table:not(.widget):not(.widget *) tr,
+.wysiwyg table:not(.widget):not(.widget *) th,
+.wysiwyg table:not(.widget):not(.widget *) td {
+	border: 1px solid inherit;
+}
+
+.wysiwyg table:not(.widget):not(.widget *) th:not(.widget):not(.widget *),
+.wysiwyg table:not(.widget):not(.widget *) td:not(.widget):not(.widget *) {
+	padding: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	text-align: left;
+	vertical-align: top;
+}
+
+.wysiwyg table:not(.widget):not(.widget *) th:not(.widget):not(.widget *) {
+	font-weight: 600;
+	text-align: center;
+}

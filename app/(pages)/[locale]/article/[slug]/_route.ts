@@ -1,5 +1,5 @@
-import { PageRoute } from '@/_library/routing';
+import { PageRoute } from '@/_routing';
 
-export const routeBlogSlug = new PageRoute<{ slug: string }>({
-	pathname: '/blog/[slug]/',
+export const routeArticleSlug = new PageRoute<{ slug: string }>({
+	pathname: '/article/[slug]/',
 });

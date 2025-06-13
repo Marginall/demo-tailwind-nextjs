@@ -31,13 +31,14 @@ export const UiInput = forwardRef<HTMLInputElement, UiInputProps>(
 						classNames?.input
 					),
 					innerWrapper: cn(
+						'flex flex-nowrap',
 						{
 							['group-data-[has-label=true]:items-center']: variant === 'bordered',
 						},
 						classNames?.innerWrapper
 					),
 					inputWrapper: cn(
-						'px-4 py-3 text-white',
+						'px-4 py-2 text-white',
 						'group-data-[focus=true]:!ring-1 group-data-[focus-visible=true]:!ring-1 group-data-[focus=true]:ring-primary group-data-[focus=true]:!border-primary group-data-[focus-visible=true]:!border-primary group-data-[focus-visible=true]:ring-offset-0 group-data-[focus-visible=true]:ring-primary',
 						{
 							['h-10 min-h-10']: size === 'sm',

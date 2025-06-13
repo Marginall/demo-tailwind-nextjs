@@ -29,7 +29,11 @@ export const UiButton = forwardRef<HTMLButtonElement, UiButtonProps>(
 				as={as}
 				domRef={ref}
 				className={cn(
-					'flex items-center justify-center rounded-3xl uppercase font-medium bg-black color-white text-sm text-white border border-color-black hover:bg-[#ffffff] hover:text-[#000] transition-all duration-300',
+					'flex items-center justify-center color-white text-white hover:text-[#fe4444] transition-all duration-300',
+					{
+						'rounded-3xl bg-black text-sm uppercase font-medium border border-color-black hover:bg-[#ffffff] hover:text-[#000]':
+							variant === 'solid',
+					},
 					classNames?.base || '',
 					className || '',
 					!props.disabled && 'cursor-pointer'

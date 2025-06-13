@@ -915,6 +915,23 @@ type DomainSocialLinkType {
   url: String!
 }
 
+type DomainTagType {
+  """Добавлять ли страницу с этим тегом в sitemap домена."""
+  add_to_sitemap: Boolean!
+  """Домен."""
+  domain: DomainType!
+  """ID домена."""
+  domain_id: ID!
+  """Тег."""
+  tag: TagType!
+  """ID тега."""
+  tag_id: ID!
+  """Общее количество просмотров тега в данном домене."""
+  total_views: Int!
+  """Количество уникальных просмотров тега в данном домене."""
+  unique_views: Int!
+}
+
 type DomainType {
   articles: [ArticleType!]
   """Черный логотип домена."""
@@ -1636,9 +1653,16 @@ type SpecialTagTypePagination {
   meta: PaginationMeta
 }
 
+input TagDomainSettingInput {
+  """Чи додавати сторінку з цим тегом до sitemap цього домену"""
+  add_to_sitemap: Boolean = false
+  """ID домена"""
+  domain_id: ID!
+}
+
 input TagInput {
-  """Чи додавати сторінку з цим тегом до sitemap"""
-  add_to_sitemap: Boolean!
+  """Налаштування тегу для різних доменів"""
+  domain_settings: [TagDomainSettingInput!]!
   """Slug тега"""
   slug: String!
   """Переводы тега."""
@@ -1742,9 +1766,16 @@ type TagTranslatesType {
 }
 
 type TagType {
-  """Чи додавати сторінку з цим тегом до sitemap"""
-  add_to_sitemap: Boolean!
+  """
+  Чи додавати сторінку з цим тегом до sitemap цього домену. Це поле запитувати лише в адмінці!
+  """
+  add_to_sitemap(
+    """Идентификатор домена, для которого нужна информация о sitemap."""
+    domain_id: ID
+  ): Boolean!
   created_at: String!
+  """Связь тега с доменом (DomainTag). Возвращает null если связи нет."""
+  domainTags: [DomainTagType]!
   id: ID!
   """Является ли сущность предпочитаемой для персональной ленты новостей."""
   is_preferred: Boolean!

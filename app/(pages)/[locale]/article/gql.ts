@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const ARTICLE_PAGE_FRAGMENT = gql`
-	fragment NewsPageFragment on ArticleType {
+	fragment NewsPage on ArticleType {
 		id
 		special_tag {
 			id
@@ -229,10 +229,11 @@ export const ARTICLE_PAGE_FRAGMENT = gql`
 `;
 export const ARTICLE = gql`
 	query Article($slug: String!) {
-		Item: Articles(slug: $slug) {
+		ArticlePageData: Articles(slug: $slug) {
 			data {
-				...NewsPageFragment
+				...NewsPage
 			}
 		}
 	}
+	${ARTICLE_PAGE_FRAGMENT}
 `;
