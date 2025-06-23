@@ -1,0 +1,1 @@
+export { TopArticles } from './view';

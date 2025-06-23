@@ -1,8 +1,6 @@
 import { ArticleContentModel, ArticleContentProps } from './types';
 
 export async function useArticleContent({ data }: ArticleContentProps): Promise<ArticleContentModel> {
-	console.log(123, data);
-
 	return {
 		title: data.translate.title,
 		body: data.translate.content,
