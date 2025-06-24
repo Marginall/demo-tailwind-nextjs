@@ -1,11 +1,12 @@
 import { ArticleFragment } from '@/_library/graphql';
 
 export interface ArticlesModel {
-	articles: ArticleModel[];
+	categories: CategoryModel[];
 }
 
-type ArticleModel = {
+type CategoryModel = {
 	id: string;
+	slug: string;
 	title: string;
 	articles: ArticleFragment[];
 };

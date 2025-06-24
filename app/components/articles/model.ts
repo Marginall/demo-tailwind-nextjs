@@ -6,10 +6,11 @@ export async function useArticles(): Promise<ArticlesModel> {
 	const data = await getHomePageData();
 
 	return {
-		articles:
+		categories:
 			arrayFilterNullable(data?.Categories?.data).map((category) => {
 				return {
 					id: category.id,
+					slug: category.slug,
 					title: category.translate.title,
 					articles: arrayFilterNullable(category.articles?.data),
 				};

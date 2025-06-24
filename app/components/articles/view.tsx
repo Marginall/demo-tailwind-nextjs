@@ -1,17 +1,26 @@
 import { ReactElement } from 'react';
 import { useArticles } from './model';
 import { Card } from './components/card';
+import { routeCategorySlug } from '@/(pages)/[locale]/category/[slug]/_route';
+import { UiLink } from '@/_ui';
 
 export async function Articles(): Promise<ReactElement> {
-	const { articles } = await useArticles();
+	const { categories } = await useArticles();
 	return (
 		<div className={'p-5'}>
 			{/* {topArticlesToday.length > 0 && <TopArticles data={topArticlesToday} />} */}
-			{articles.map((block) => (
+			{categories.map((block) => (
 				<div key={block.id} className={'mb-10'}>
-					<div className={'mb-5 text-grey font-medium hover:text-[#fe4444] transition-colors duration-300'}>
+					<UiLink
+						className={'mb-5 text-grey font-medium hover:text-[#fe4444] transition-colors duration-300'}
+						href={routeCategorySlug.buildHref({
+							segments: {
+								slug: block.slug,
+							},
+						})}
+					>
 						{block.title}
-					</div>
+					</UiLink>
 					<div className='grid grid-rows-2 grid-cols-4 gap-5'>
 						{block.articles.map((article, index) => (
 							<div

@@ -33,7 +33,7 @@ export const fragment = gql`
 
 export const GET_HOME_PAGE_DATA = gql`
 	query GetHomePageData {
-		Categories(per_page: 10) {
+		Categories(per_page: 6) {
 			data {
 				id
 				slug

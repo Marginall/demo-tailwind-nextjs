@@ -2655,6 +2655,75 @@ export type ArticleQuery = {
 	} | null;
 };
 
+export type CategoryArticleFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	translate: { __typename?: 'ArticleTranslatesType'; title: string };
+	cover?: {
+		__typename?: 'File';
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+};
+
+export type CategoryFragment = {
+	__typename?: 'CategoryType';
+	id: string;
+	slug: string;
+	translate: { __typename?: 'CategoryTranslatesType'; title: string };
+	articles?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+			cover?: {
+				__typename?: 'File';
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null;
+		} | null> | null;
+	} | null;
+};
+
+export type CategoryQueryVariables = Exact<{
+	slug: Scalars['String']['input'];
+}>;
+
+export type CategoryQuery = {
+	__typename?: 'Query';
+	Categories?: {
+		__typename?: 'CategoryTypePagination';
+		data?: Array<{
+			__typename?: 'CategoryType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'CategoryTranslatesType'; title: string };
+			articles?: {
+				__typename?: 'ArticleTypePagination';
+				data?: Array<{
+					__typename?: 'ArticleType';
+					id: string;
+					slug: string;
+					translate: { __typename?: 'ArticleTranslatesType'; title: string };
+					cover?: {
+						__typename?: 'File';
+						responsive_images_as_array: Array<{
+							__typename?: 'ResponsiveImageSize';
+							url?: string | null;
+							width: number;
+						}>;
+					} | null;
+				} | null> | null;
+			} | null;
+		} | null> | null;
+	} | null;
+};
+
 export type PagesListFragment = {
 	__typename?: 'Page';
 	slug: string;
