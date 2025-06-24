@@ -35,16 +35,16 @@ export const GET_HOME_PAGE_DATA = gql`
 	query GetHomePageData {
 		Categories(per_page: 10) {
 			data {
-				articles {
+				id
+				slug
+				translate {
+					title
+				}
+				articles(per_page: 6) {
 					data {
 						...Article
 					}
 				}
-			}
-		}
-		TopArticlesToday {
-			data {
-				...Article
 			}
 		}
 	}

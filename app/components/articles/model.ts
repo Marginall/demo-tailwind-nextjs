@@ -4,7 +4,15 @@ import { ArticlesModel } from './types';
 
 export async function useArticles(): Promise<ArticlesModel> {
 	const data = await getHomePageData();
+
 	return {
-		topArticlesToday: arrayFilterNullable(data?.TopArticlesToday?.data) || [],
+		articles:
+			arrayFilterNullable(data?.Categories?.data).map((category) => {
+				return {
+					id: category.id,
+					title: category.translate.title,
+					articles: arrayFilterNullable(category.articles?.data),
+				};
+			}) || [],
 	};
 }
