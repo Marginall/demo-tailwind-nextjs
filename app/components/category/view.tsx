@@ -1,24 +1,22 @@
-'use client';
 import { ReactElement } from 'react';
 import { CategoryProps } from './types';
-import { arrayFilterNullable } from '@wezom/toolkit-array';
-import { Card } from './components/card';
+import { getData } from './_actions/get-data';
+import { List } from './components/list';
+import { getLocale } from 'next-intl/server';
+import { getI18n } from '@/_library/i18n/server';
 
-export function Category({ data }: CategoryProps): ReactElement {
-	const articles = arrayFilterNullable(data.articles?.data);
-
+export async function Category({ data }: CategoryProps): Promise<ReactElement> {
+	const locale = await getLocale();
+	const { articles } = await getData({ locale, slug: data.slug });
+	const t = await getI18n();
+	const translates = {
+		loadMore: t('articles__personal-news'),
+		empty: t('archive__no-news'),
+	};
 	return (
-		<div className='p-5'>
+		<div className='px-5 pt-5 pb-10'>
 			<h1 className='mb-5 text-2xl font-bold'>{data.translate.title}</h1>
-			<div className='grid grid-cols-4 gap-5'>
-				{articles && articles.length > 0
-					? articles.map((article, index) => (
-							<div className={`h-[300px] border border-gray-200 rounded-[3px]`} key={article.id}>
-								<Card data={article} />
-							</div>
-						))
-					: null}
-			</div>
+			<List slug={data.slug} data={articles} translates={translates} />
 		</div>
 	);
 }

@@ -2655,39 +2655,11 @@ export type ArticleQuery = {
 	} | null;
 };
 
-export type CategoryArticleFragment = {
-	__typename?: 'ArticleType';
-	id: string;
-	slug: string;
-	translate: { __typename?: 'ArticleTranslatesType'; title: string };
-	cover?: {
-		__typename?: 'File';
-		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
-	} | null;
-};
-
 export type CategoryFragment = {
 	__typename?: 'CategoryType';
 	id: string;
 	slug: string;
 	translate: { __typename?: 'CategoryTranslatesType'; title: string };
-	articles?: {
-		__typename?: 'ArticleTypePagination';
-		data?: Array<{
-			__typename?: 'ArticleType';
-			id: string;
-			slug: string;
-			translate: { __typename?: 'ArticleTranslatesType'; title: string };
-			cover?: {
-				__typename?: 'File';
-				responsive_images_as_array: Array<{
-					__typename?: 'ResponsiveImageSize';
-					url?: string | null;
-					width: number;
-				}>;
-			} | null;
-		} | null> | null;
-	} | null;
 };
 
 export type CategoryQueryVariables = Exact<{
@@ -2703,23 +2675,6 @@ export type CategoryQuery = {
 			id: string;
 			slug: string;
 			translate: { __typename?: 'CategoryTranslatesType'; title: string };
-			articles?: {
-				__typename?: 'ArticleTypePagination';
-				data?: Array<{
-					__typename?: 'ArticleType';
-					id: string;
-					slug: string;
-					translate: { __typename?: 'ArticleTranslatesType'; title: string };
-					cover?: {
-						__typename?: 'File';
-						responsive_images_as_array: Array<{
-							__typename?: 'ResponsiveImageSize';
-							url?: string | null;
-							width: number;
-						}>;
-					} | null;
-				} | null> | null;
-			} | null;
 		} | null> | null;
 	} | null;
 };
@@ -3123,6 +3078,43 @@ export type GetHomePageDataQuery = {
 						translate: { __typename?: 'CategoryTranslatesType'; title: string };
 					}>;
 				} | null> | null;
+			} | null;
+		} | null> | null;
+	} | null;
+};
+
+export type CategoryArticleFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	translate: { __typename?: 'ArticleTranslatesType'; title: string };
+	cover?: {
+		__typename?: 'File';
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+};
+
+export type CategoryArticlesQueryVariables = Exact<{
+	slug: Scalars['String']['input'];
+	page: Scalars['Int']['input'];
+}>;
+
+export type CategoryArticlesQuery = {
+	__typename?: 'Query';
+	Articles?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+			cover?: {
+				__typename?: 'File';
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
 			} | null;
 		} | null> | null;
 	} | null;
