@@ -9,7 +9,7 @@ export function HeaderSearch(): ReactElement {
 	const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 
 	return (
-		<div {...getTestid('header-search')} className={'w-full'}>
+		<div {...getTestid('header-search')} className={'w-full hidden 2xl:block'}>
 			<SearchHeaderInput onOpen={onOpen} />
 			<SearchPopover isOpen={isOpen} onOpenChange={onOpenChange} onClose={onClose} />
 		</div>

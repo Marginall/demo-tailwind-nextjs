@@ -12,7 +12,9 @@ export async function Articles(): Promise<ReactElement> {
 			{categories.map((block) => (
 				<div key={block.id} className={'mb-10'}>
 					<UiLink
-						className={'mb-5 text-grey font-medium hover:text-[#fe4444] transition-colors duration-300'}
+						className={
+							'block mb-5 text-grey font-medium hover:text-[#fe4444] transition-colors duration-300'
+						}
 						href={routeCategorySlug.buildHref({
 							segments: {
 								slug: block.slug,
@@ -21,21 +23,21 @@ export async function Articles(): Promise<ReactElement> {
 					>
 						{block.title}
 					</UiLink>
-					<div className='grid grid-rows-2 grid-cols-4 gap-5'>
+					<div className='grid 2xl:grid-rows-2 grid-cols-2 2xl:grid-cols-4 gap-5'>
 						{block.articles.map((article, index) => (
 							<div
 								className={`
 									${
 										index === 0
-											? 'row-span-2 col-span-1'
+											? '2xl:row-span-2 2xl:col-span-1 2xl:h-auto'
 											: index === 5
-												? 'row-span-2 col-start-4'
+												? '2xl:row-span-2 2xl:col-start-4 2xl:h-auto'
 												: index === 1 || index === 2
-													? 'col-span-1 h-[225px]'
+													? '2xl:col-span-1 2xl:h-[225px]'
 													: index === 3
-														? 'col-start-2 row-start-2 h-[225px]'
+														? '2xl:col-start-2 2xl:row-start-2 2xl:h-[225px]'
 														: index === 4
-															? 'col-start-3 row-start-2 h-[225px]'
+															? '2xl:col-start-3 2xl:row-start-2 2xl:h-[225px]'
 															: ''
 									}
 								border border-gray-200 rounded-[3px]`}

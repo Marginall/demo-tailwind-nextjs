@@ -8,7 +8,7 @@ export async function Sidebar(): Promise<ReactElement> {
 	const t = await getI18n();
 
 	return (
-		<div className='w-[409px] border-l border-gray-300'>
+		<div className='md:w-[409px] md:border-l md:border-gray-300'>
 			<h3 className='text-lg font-medium py-6 px-5 border-b border-gray-300'>{t('on-page-sidebar__title')}</h3>
 			<List data={newsColumn} translate={t('page-news-list__button-more-news')} />
 		</div>

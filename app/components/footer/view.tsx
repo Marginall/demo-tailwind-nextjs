@@ -12,8 +12,10 @@ export async function Footer(): Promise<ReactElement> {
 		<div id={'footer'} {...getTestid('footer')} className={'w-full mt-5'}>
 			<UiContainer>
 				<div className={''}>
-					<div className={'flex items-start pt-2 pb-2 border-t border-b border-gray-300'}>
-						<div className={'flex flex-wrap w-2/3 pt-4 pb-4 gap-4'}>
+					<div
+						className={'flex flex-col md:flex-row items-start pt-2 pb-2 border-t border-b border-gray-300'}
+					>
+						<div className={'hidden md:flex flex-wrap w-2/3 pt-4 pb-4 gap-4'}>
 							{navCategories.map((category) => (
 								<UiLink
 									href={`/${category.slug}`}
@@ -30,7 +32,7 @@ export async function Footer(): Promise<ReactElement> {
 								</UiLink>
 							))}
 						</div>
-						<div className={'w-1/3 flex items-center justify-end'}>
+						<div className={'lg:w-1/3 flex items-center justify-end'}>
 							<Socials data={socials} withTitle />
 						</div>
 					</div>

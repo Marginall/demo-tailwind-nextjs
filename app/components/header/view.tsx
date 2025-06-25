@@ -22,7 +22,7 @@ export async function Header(): Promise<ReactElement> {
 	return (
 		<>
 			<header id={'header'} {...getTestid('header')} className={'w-full bg-black/90 inline'}>
-				<UiContainer className={'pr-10'}>
+				<UiContainer className={'2xl:pr-10'}>
 					<div
 						{...getTestid('header-top')}
 						className={'w-full flex justify-between items-center gap-[20px] py-[14px]'}
@@ -43,7 +43,7 @@ export async function Header(): Promise<ReactElement> {
 					</div>
 					<div
 						{...getTestid('header-center')}
-						className={'w-full flex justify-between items-center gap-[10px] md:gap-[40px]'}
+						className={'w-full hidden 2xl:flex justify-between items-center gap-[10px] md:gap-[40px]'}
 					>
 						<MenuDrawer />
 						<Menu data={navCategories} />

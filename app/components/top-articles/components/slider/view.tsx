@@ -21,7 +21,7 @@ export function Slider({ data }: SliderProps) {
 		>
 			{data.map((article) => (
 				<SwiperSlide key={article.id}>
-					<div className={'w-full h-[818px] relative'}>
+					<div className={'w-full h-[600px] lg:h-[818px] relative'}>
 						<UiImage
 							src={article.cover?.responsive_images_as_array?.[0]?.url}
 							alt={article.translate.title}
@@ -29,6 +29,7 @@ export function Slider({ data }: SliderProps) {
 							height={818}
 							loading={'lazy'}
 							classNames={{
+								picture: 'h-full',
 								img: 'h-full object-cover object-center overflow-hidden',
 							}}
 						/>
@@ -41,7 +42,7 @@ export function Slider({ data }: SliderProps) {
                  linear-gradient(0deg, #FAFAFA 0%, rgba(250, 250, 250, 0) 23.39%)`,
 							}}
 						></div>
-						<div className={'absolute bottom-[200px] left-0 w-full z-10'}>
+						<div className={'absolute bottom-[150px] md:bottom-[200px] left-0 w-full z-10'}>
 							<UiContainer>
 								<h2 className={'text-white text-5xl'}>{article.translate.title}</h2>
 								<UiLink

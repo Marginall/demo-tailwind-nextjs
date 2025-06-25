@@ -14,13 +14,11 @@ export default async function Homepage(): Promise<ReactElement> {
 			{/* {metadata && <DocumentMetadata {...metadata} />} */}
 			<TopArticles />
 			<UiContainer className={'py-5'}>
-				<div className={'flex bg-white drop-shadow-[0_0_40px_rgba(0,0,0,0.05)]'}>
+				<div className={'flex flex-col md:flex-row bg-white drop-shadow-[0_0_40px_rgba(0,0,0,0.05)]'}>
 					<div className={'flex-grow'}>
 						<Articles />
 					</div>
-					<div className={'w-[409px]'}>
-						<Sidebar />
-					</div>
+					<Sidebar />
 				</div>
 			</UiContainer>
 		</>
