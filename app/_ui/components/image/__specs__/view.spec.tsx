@@ -24,7 +24,7 @@ describe('UiImage', () => {
 	it('renders default image if src is not provided', () => {
 		render(<UiImage width={100} height={50} />);
 		const img = screen.getByRole('img');
-		expect(img).toHaveAttribute('src', '/static/no-image.svg');
+		expect(img).toHaveAttribute('src', '/static/images/no-photo.jpg');
 	});
 
 	it('renders <source> tags for webp and small images', () => {
