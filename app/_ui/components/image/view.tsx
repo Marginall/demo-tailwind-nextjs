@@ -20,7 +20,7 @@ export function UiImage({
 	loading = 'lazy',
 }: UiImageProps): ReactElement {
 	const [loaded, setLoaded] = useState(false);
-	const defaultImage = '/static/no-image.svg';
+	const defaultImage = '/static/images/no-photo.jpg';
 	const isSvg = src?.endsWith('.svg');
 
 	return (

@@ -2655,6 +2655,30 @@ export type ArticleQuery = {
 	} | null;
 };
 
+export type CategoryFragment = {
+	__typename?: 'CategoryType';
+	id: string;
+	slug: string;
+	translate: { __typename?: 'CategoryTranslatesType'; title: string };
+};
+
+export type CategoryQueryVariables = Exact<{
+	slug: Scalars['String']['input'];
+}>;
+
+export type CategoryQuery = {
+	__typename?: 'Query';
+	Categories?: {
+		__typename?: 'CategoryTypePagination';
+		data?: Array<{
+			__typename?: 'CategoryType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'CategoryTranslatesType'; title: string };
+		} | null> | null;
+	} | null;
+};
+
 export type PagesListFragment = {
 	__typename?: 'Page';
 	slug: string;
@@ -2992,6 +3016,110 @@ export type GetCommonDataQuery = {
 	}> | null;
 };
 
+export type ArticleFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	published_at?: string | null;
+	special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+	cover?: {
+		__typename?: 'File';
+		id: string;
+		url?: string | null;
+		alt?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+	translate: { __typename?: 'ArticleTranslatesType'; title: string };
+	categories: Array<{
+		__typename?: 'CategoryType';
+		id: string;
+		slug: string;
+		color: string;
+		translate: { __typename?: 'CategoryTranslatesType'; title: string };
+	}>;
+};
+
+export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetHomePageDataQuery = {
+	__typename?: 'Query';
+	Categories?: {
+		__typename?: 'CategoryTypePagination';
+		data?: Array<{
+			__typename?: 'CategoryType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'CategoryTranslatesType'; title: string };
+			articles?: {
+				__typename?: 'ArticleTypePagination';
+				data?: Array<{
+					__typename?: 'ArticleType';
+					id: string;
+					slug: string;
+					published_at?: string | null;
+					special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+					cover?: {
+						__typename?: 'File';
+						id: string;
+						url?: string | null;
+						alt?: string | null;
+						responsive_images_as_array: Array<{
+							__typename?: 'ResponsiveImageSize';
+							url?: string | null;
+							width: number;
+						}>;
+					} | null;
+					translate: { __typename?: 'ArticleTranslatesType'; title: string };
+					categories: Array<{
+						__typename?: 'CategoryType';
+						id: string;
+						slug: string;
+						color: string;
+						translate: { __typename?: 'CategoryTranslatesType'; title: string };
+					}>;
+				} | null> | null;
+			} | null;
+		} | null> | null;
+	} | null;
+};
+
+export type CategoryArticleFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	translate: { __typename?: 'ArticleTranslatesType'; title: string };
+	cover?: {
+		__typename?: 'File';
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+};
+
+export type CategoryArticlesQueryVariables = Exact<{
+	slug: Scalars['String']['input'];
+	page: Scalars['Int']['input'];
+}>;
+
+export type CategoryArticlesQuery = {
+	__typename?: 'Query';
+	Articles?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+			cover?: {
+				__typename?: 'File';
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null;
+		} | null> | null;
+	} | null;
+};
+
 export type SearchQueryVariables = Exact<{
 	query: Scalars['String']['input'];
 }>;
@@ -3005,6 +3133,64 @@ export type SearchQuery = {
 			id: string;
 			slug: string;
 			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+		} | null> | null;
+	} | null;
+};
+
+export type TopArticleFragment = {
+	__typename?: 'ArticleType';
+	id: string;
+	slug: string;
+	published_at?: string | null;
+	special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+	cover?: {
+		__typename?: 'File';
+		id: string;
+		url?: string | null;
+		alt?: string | null;
+		responsive_images_as_array: Array<{ __typename?: 'ResponsiveImageSize'; url?: string | null; width: number }>;
+	} | null;
+	translate: { __typename?: 'ArticleTranslatesType'; title: string };
+	categories: Array<{
+		__typename?: 'CategoryType';
+		id: string;
+		slug: string;
+		color: string;
+		translate: { __typename?: 'CategoryTranslatesType'; title: string };
+	}>;
+};
+
+export type GetTopArticlesDataQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTopArticlesDataQuery = {
+	__typename?: 'Query';
+	TopArticlesToday?: {
+		__typename?: 'ArticleTypePagination';
+		data?: Array<{
+			__typename?: 'ArticleType';
+			id: string;
+			slug: string;
+			published_at?: string | null;
+			special_tag?: { __typename?: 'SpecialTagType'; id: string } | null;
+			cover?: {
+				__typename?: 'File';
+				id: string;
+				url?: string | null;
+				alt?: string | null;
+				responsive_images_as_array: Array<{
+					__typename?: 'ResponsiveImageSize';
+					url?: string | null;
+					width: number;
+				}>;
+			} | null;
+			translate: { __typename?: 'ArticleTranslatesType'; title: string };
+			categories: Array<{
+				__typename?: 'CategoryType';
+				id: string;
+				slug: string;
+				color: string;
+				translate: { __typename?: 'CategoryTranslatesType'; title: string };
+			}>;
 		} | null> | null;
 	} | null;
 };
